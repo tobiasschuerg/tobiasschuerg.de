@@ -1,2 +1,2 @@
 theme: jekyll-theme-cayman
-include: ['apps/smartphone_addicted']
+include: ['apps', 'apps/smartphone_addicted']
