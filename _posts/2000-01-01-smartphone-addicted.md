@@ -2,6 +2,8 @@
 layout: default
 title:  "Smartphone Addicted"
 categories: Apps
+permalink: /apps/smartphone-addicted
+
 ---
 
 <h2>Smartphone usage count tracker and timer</h2>

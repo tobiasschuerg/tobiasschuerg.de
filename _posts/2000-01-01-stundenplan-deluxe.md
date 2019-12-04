@@ -2,6 +2,8 @@
 layout: default
 title:  "Stundenplan Deluxe"
 categories: Apps
+permalink: /apps/stundenplan
+
 ---
 
 <h2>{{ page.title }}</h2>
