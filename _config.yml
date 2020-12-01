@@ -9,9 +9,12 @@ twitter_username: tbsdlx
 github_username:  tobiasschuerg
 
 # Build settings
-theme: jekyll-theme-cayman
+# theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jemoji
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
