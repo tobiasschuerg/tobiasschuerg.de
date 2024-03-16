@@ -14,3 +14,5 @@ permalink: /apps/stundenplan
 [Privacy Policy](/apps/stundenplan/policy)
 
 [Terms](/apps/stundenplan/terms)
+
+[Delete Account](/apps/delete)
