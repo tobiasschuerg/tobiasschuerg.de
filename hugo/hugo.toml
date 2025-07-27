@@ -1,0 +1,22 @@
+baseURL = 'https://www.tobiasschuerg.de'
+languageCode = 'en-us'
+title = 'tobiasschuerg.de'
+
+# Disable unused features
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  description = "Collecting digital dust."
+  github_username = "tobiasschuerg"
+
+[menu]
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 20
