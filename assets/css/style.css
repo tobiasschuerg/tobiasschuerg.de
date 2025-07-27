@@ -808,3 +808,10 @@
  
  .site-footer-credits {
    color: #819198; }
+
+/* Sticky footer styles */
+.page-wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
