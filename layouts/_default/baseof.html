@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en" }}">
+<html lang="{{ .Site.LanguageCode | default "de" }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -270,6 +270,27 @@
             }
         }
     </style>
+    
+    <!-- Language Detection Script -->
+    <script>
+        (function() {
+            // Only run on the root page
+            if (window.location.pathname !== '/') return;
+            
+            // Check if user has already made a language choice
+            if (localStorage.getItem('languagePreference')) return;
+            
+            // Get browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.split('-')[0].toLowerCase();
+            
+            // Redirect to English if browser language is English
+            if (langCode === 'en') {
+                window.location.href = '/en/';
+            }
+            // For all other languages, stay on German (default)
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
