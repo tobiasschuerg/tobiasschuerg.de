@@ -1,6 +1,6 @@
 ---
 title: "Family Activities"
-description:
+project_description:
   de: "Eine Sammlung familienfreundlicher Aktivitäten rund um Friedrichshafen."
   en: "A collection of family friendly activities around Friedrichshafen."
 weight: 2

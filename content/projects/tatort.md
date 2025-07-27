@@ -1,6 +1,6 @@
 ---
 title: "Tatort Logbuch"
-description:
+project_description:
   de: "Episodenübersicht aller Tatortfolgen."
   en: "Track your German crime series viewing progress. Never miss an episode."
 weight: 4

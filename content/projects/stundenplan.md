@@ -1,6 +1,6 @@
 ---
 title: "Stundenplan Deluxe"
-description:
+project_description:
   de: "Die flexible Stundenplan-App für Schüler, Lehrer, Studenten und Eltern."
   en: "The flexible schedule app for students and teachers. Clean design, offline capability."
 weight: 1

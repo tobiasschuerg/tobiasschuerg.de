@@ -1,6 +1,6 @@
 ---
 title: "Expenses Deluxe"
-description:
+project_description:
   de: "Einfache Ausgabenverfolgung für Gruppen und Einzelpersonen. Rechnungen aufteilen, Ausgaben verfolgen."
   en: "Simple expense tracking for groups and individuals. Split bills, track spending."
 weight: 3

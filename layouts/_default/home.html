@@ -16,15 +16,11 @@
       <h3>{{ .Title }}</h3>
       
       <!-- Project description based on language -->
-      {{ if .Params.description }}
-        {{ if eq $.Site.Language.Lang "de" }}
-          {{ if .Params.description.de }}
-            <p>{{ .Params.description.de }}</p>
-          {{ end }}
+      {{ if .Params.project_description }}
+        {{ if eq .Site.Language.Lang "de" }}
+          <p>{{ .Params.project_description.de }}</p>
         {{ else }}
-          {{ if .Params.description.en }}
-            <p>{{ .Params.description.en }}</p>
-          {{ end }}
+          <p>{{ .Params.project_description.en }}</p>
         {{ end }}
       {{ end }}
       
