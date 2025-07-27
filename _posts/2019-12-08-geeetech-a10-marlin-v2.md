@@ -3,6 +3,7 @@ layout: default
 title:  "Upgrade Geeetch A10 Firmware to Marlin 2.0"
 categories: [3D Printing]
 description: Two minute firmware upgrade instruction
+published: false
 info_box: |
    [UPDATE 2020] There is now [Auto Build Marlin](https://marlinfw.org/docs/basics/auto_build_marlin.html) which itself is a Visual Studio Code extension that provides a one-button interface to build and upload Marlin Firmware to your selected board. This is an even better and easier way to update your printer to the latest marlin version.
 

@@ -2,7 +2,7 @@
 title: tobiasschuerg.de
 email: info@tobiasschuerg.de
 description: >- # this means to ignore newlines until "baseurl:"
-  foo bar
+  Collecting digital dust.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  tobiasschuerg
