@@ -10,82 +10,40 @@
 
 <!-- Display projects as cards -->
 <div class="project-grid">
-  <!-- Stundenplan Deluxe -->
-  <div class="project-card">
-    <h3>Stundenplan Deluxe</h3>
-    {{ if eq .Site.Language.Lang "de" }}
-    <p>Die flexible Stundenplan-App für Schüler, Lehrer, Studenten und Eltern.</p>
-    {{ else }}
-    <p>The flexible schedule app for students and teachers. Clean design, offline capability.</p>
-    {{ end }}
-    <div class="project-links">
-      <a href="https://play.google.com/store/apps/details?id=com.tobiasschuerg.stundenplan">Play Store</a>
-      {{ if eq .Site.Language.Lang "de" }}
-      <a href="/apps/stundenplan/policy/">Datenschutzerklärung</a>
-      <a href="/apps/stundenplan/terms/">Nutzungsbedingungen</a>
-      {{ else }}
-      <a href="/apps/stundenplan/policy/">Privacy Policy</a>
-      <a href="/apps/stundenplan/terms/">Terms</a>
+  {{ $projects := where .Site.RegularPages "Section" "projects" }}
+  {{ range sort $projects ".Params.weight" }}
+    <div class="project-card">
+      <h3>{{ .Title }}</h3>
+      
+      <!-- Project description based on language -->
+      {{ if .Params.description }}
+        {{ if eq $.Site.Language.Lang "de" }}
+          {{ if .Params.description.de }}
+            <p>{{ .Params.description.de }}</p>
+          {{ end }}
+        {{ else }}
+          {{ if .Params.description.en }}
+            <p>{{ .Params.description.en }}</p>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <!-- Project links -->
+      {{ if .Params.links }}
+        <div class="project-links">
+          {{ range .Params.links }}
+            <a href="{{ .url }}"{{ if .primary }} class="primary-link"{{ end }}>
+              {{ if eq $.Site.Language.Lang "de" }}
+                {{ .text.de }}
+              {{ else }}
+                {{ .text.en }}
+              {{ end }}
+            </a>
+          {{ end }}
+        </div>
       {{ end }}
     </div>
-  </div>
-
-  <!-- Family Activities -->
-  <div class="project-card">
-    <h3>Family Activities</h3>
-    {{ if eq .Site.Language.Lang "de" }}
-    <p>Eine Sammlung familienfreundlicher Aktivitäten rund um Friedrichshafen.</p>
-    {{ else }}
-    <p>A collection of family friendly activities around Friedrichshafen.</p>
-    {{ end }}
-    <div class="project-links">
-      {{ if eq .Site.Language.Lang "de" }}
-      <a href="https://tobiasschuerg.github.io/family-activities/">Family Activities anzeigen</a>
-      {{ else }}
-      <a href="https://tobiasschuerg.github.io/family-activities/">View Family Activities</a>
-      {{ end }}
-    </div>
-  </div>
-
-  <!-- Expenses Deluxe -->
-  <div class="project-card">
-    <h3>Expenses Deluxe</h3>
-    {{ if eq .Site.Language.Lang "de" }}
-    <p>Einfache Ausgabenverfolgung für Gruppen und Einzelpersonen. Rechnungen aufteilen, Ausgaben verfolgen.</p>
-    {{ else }}
-    <p>Simple expense tracking for groups and individuals. Split bills, track spending.</p>
-    {{ end }}
-    <div class="project-links">
-      <a href="https://play.google.com/store/apps/details?id=com.tobiasschuerg.expenses">Play Store</a>
-      {{ if eq .Site.Language.Lang "de" }}
-      <a href="/apps/expenses/policy/">Datenschutzerklärung</a>
-      <a href="/apps/expenses/terms/">Nutzungsbedingungen</a>
-      {{ else }}
-      <a href="/apps/expenses/policy/">Privacy Policy</a>
-      <a href="/apps/expenses/terms/">Terms</a>
-      {{ end }}
-    </div>
-  </div>
-
-  <!-- Tatort Logbuch -->
-  <div class="project-card">
-    <h3>Tatort Logbuch</h3>
-    {{ if eq .Site.Language.Lang "de" }}
-    <p>Episodenübersicht aller Tatortfolgen.</p>
-    {{ else }}
-    <p>Track your German crime series viewing progress. Never miss an episode.</p>
-    {{ end }}
-    <div class="project-links">
-      <a href="https://play.google.com/store/apps/details?id=de.tobiasschuerg.tatort">Play Store</a>
-      {{ if eq .Site.Language.Lang "de" }}
-      <a href="/apps/tatort/policy/">Datenschutzerklärung</a>
-      <a href="/apps/tatort/terms/">Nutzungsbedingungen</a>
-      {{ else }}
-      <a href="/apps/tatort/policy/">Privacy Policy</a>
-      <a href="/apps/tatort/terms/">Terms</a>
-      {{ end }}
-    </div>
-  </div>
+  {{ end }}
 </div>
 
 {{ end }}
