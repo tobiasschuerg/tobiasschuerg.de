@@ -1,16 +1,24 @@
 # tobiasschuerg.de
 
-This is a Jekyll project.
+Personal website built with Hugo.
 
-## Usage
-Install Jekyll and other dependencies:
+## Development
 
-```
-bundle install
+### Prerequisites
+- [Hugo](https://gohugo.io/installation/) (v0.120.3 or later)
+
+### Local Development
+
+```bash
+hugo server
 ```
 
-Run the site locally:
+The site will be available at `http://localhost:1313`
 
+### Building for Production
+
+```bash
+hugo
 ```
-bundle exec jekyll serve
-```
+
+The built site will be in the `public/` directory.
