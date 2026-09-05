@@ -1,69 +1,113 @@
 ---
-title: "Tatort Logbuch Privacy Policy"
+title: "Tatort Logbuch Datenschutzerklärung"
 url: "/apps/tatort/policy"
 ---
 
-## Privacy Policy
+## Datenschutzerklärung
 
-Tobias Schürg built the Tatort Logbuch app as a Free app. This SERVICE is provided by Tobias Schürg at no cost and is intended for use as is.
+Diese Erklärung beschreibt, welche personenbezogenen Daten die Android-App **Tatort Logbuch** verarbeitet, zu welchem Zweck das geschieht und welche Rechte du dabei hast.
 
-This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+Stand: 7. September 2026
 
-If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+### Verantwortlicher
 
-The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which are accessible at Tatort Logbuch unless otherwise defined in this Privacy Policy.
+Tobias Schürg\
+[Straße Hausnummer]\
+[PLZ Ort]\
+Deutschland
 
-**Information Collection and Use**
+E-Mail: [datenschutz@tobiasschuerg.de]
 
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to email address, liked episodes, watched episodes. The information that I request will be retained on your device and is not collected by me in any way.
+Ein Datenschutzbeauftragter ist nicht bestellt; dazu besteht keine gesetzliche Verpflichtung.
 
-The app does use third-party services that may collect information used to identify you.
+### Die App funktioniert ohne Konto
 
-Link to privacy policy of third-party service providers used by the app
+Tatort Logbuch lässt sich vollständig ohne Anmeldung nutzen. In diesem Fall bleiben alle deine Eingaben — gesehene Folgen, Favoriten und Bewertungen — ausschließlich in einer Datenbank auf deinem Gerät. Sie werden nicht an mich übertragen.
 
-*   [Google Play Services](https://www.google.com/policies/privacy/)
-*   [Firebase Analytics](https://firebase.google.com/policies/analytics)
-*   [Crashlytics](http://try.crashlytics.com/terms/privacy-policy.pdf)
+Erst wenn du dich freiwillig anmeldest, verlassen Daten dein Gerät. Was dann passiert, steht im nächsten Abschnitt.
 
-**Log Data**
+### Anmeldung und Synchronisation
 
-I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol ("IP") address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
+Meldest du dich mit deinem Google-Konto an, kannst du deine Daten zwischen mehreren Geräten synchronisieren. Dabei werden verarbeitet:
 
-**Cookies**
+*   deine Google-Konto-Kennung und die hinterlegte E-Mail-Adresse (über Firebase Authentication),
+*   die Folgen, die du als gesehen markiert hast, jeweils mit Datum,
+*   die Folgen, die du als Favorit gespeichert hast,
+*   die Bewertungen, die du vergeben hast.
 
-Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
+Diese Daten werden bei Google Cloud Firestore gespeichert und sind dort deinem Konto zugeordnet.
 
-This Service does not use these "cookies" explicitly. However, the app may use third party code and libraries that use "cookies" to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+**Zweck** ist die Bereitstellung der Synchronisation, also genau die Funktion, für die du dich angemeldet hast.
 
-**Service Providers**
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO — die Verarbeitung ist zur Erfüllung des Nutzungsverhältnisses erforderlich, das mit deiner Anmeldung zustande kommt.
 
-I may employ third-party companies and individuals due to the following reasons:
+**Speicherdauer:** Die Daten bleiben gespeichert, solange dein Konto besteht. Du kannst die Löschung jederzeit veranlassen, siehe [Konto löschen](/apps/delete). Nach Eingang der Anfrage lösche ich das Konto und alle zugehörigen Daten.
 
-*   To facilitate our Service;
-*   To provide the Service on our behalf;
-*   To perform Service-related services; or
-*   To assist us in analyzing how our Service is used.
+### Fehlerberichte
 
-I want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+Stürzt die App ab oder tritt ein schwerer Fehler auf, wird ein Fehlerbericht über **Firebase Crashlytics** übermittelt. Ein solcher Bericht enthält technische Angaben zum Zeitpunkt des Fehlers: Gerätemodell, Android-Version, App-Version, Zustand der App, Fehlermeldung samt Aufrufliste sowie eine zufällig erzeugte Installations-Kennung. Crashlytics verarbeitet dabei kurzzeitig deine IP-Adresse; sie wird von Google nicht dauerhaft gespeichert.
 
-**Security**
+Fehlerberichte enthalten keine Angaben darüber, welche Folgen du dir ansiehst, und keine Inhalte deines Logbuchs.
 
-I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security.
+**Zweck** ist das Erkennen und Beheben von Fehlern.
 
-**Links to Other Sites**
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt darin, die Stabilität der App sicherzustellen. Da die Berichte rein technisch sind und keine Rückschlüsse auf dein Nutzungsverhalten zulassen, überwiegen deine Interessen hier nicht.
 
-This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+**Speicherdauer:** Crashlytics löscht Fehlerberichte automatisch nach 90 Tagen.
 
-**Children's Privacy**
+Eine Analyse deines Nutzungsverhaltens findet nicht statt. Die App enthält weder Werbung noch Tracking- oder Analyse-Dienste.
 
-These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13\. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.
+### Missbrauchsschutz
 
-**Changes to This Privacy Policy**
+Um zu verhindern, dass die von mir betriebenen Dienste von manipulierten App-Kopien oder automatisiert missbraucht werden, kommt **Firebase App Check** mit dem Play-Integrity-Verfahren zum Einsatz. Dabei bestätigt Google, dass eine Anfrage von einer unveränderten Installation aus dem Play Store stammt. Übermittelt werden ein Integritätsnachweis von Google Play und deine IP-Adresse; Inhalte deines Logbuchs werden dabei nicht verarbeitet.
 
-I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse am Schutz vor Missbrauch.
 
-**Contact Us**
+### Erinnerungen
 
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at tobiasschuerg.de.
+Auf Wunsch erinnert dich die App am Tag der Ausstrahlung an eine neue Folge. Diese Erinnerung wird ausschließlich auf deinem Gerät berechnet und ausgelöst; es werden dafür keine Daten an mich übermittelt. Du kannst die Funktion in den Einstellungen jederzeit abschalten oder die Benachrichtigungsberechtigung entziehen.
 
-This privacy policy page was created at [privacypolicytemplate.net](https://privacypolicytemplate.net) and modified/generated by [App Privacy Policy Generator](https://app-privacy-policy-generator.firebaseapp.com/)
+### Abruf von Inhalten
+
+Die App lädt Folgendaten und Bilder von externen Servern. Dabei wird technisch bedingt deine IP-Adresse an den jeweiligen Anbieter übermittelt; anders lässt sich ein Abruf im Internet nicht durchführen. Betroffen sind die Server, auf denen die Folgendaten bereitgestellt werden, sowie die ARD Mediathek (`api.ardmediathek.de`), sofern Bildmaterial zu einer Folge angezeigt wird.
+
+Öffnest du aus der App heraus einen Link — etwa zur ARD Mediathek, zur Wikipedia oder zu IMDb — verlässt du den Bereich dieser Erklärung. Für die Datenverarbeitung auf den verlinkten Seiten sind deren Betreiber verantwortlich.
+
+### Bewertung im Play Store
+
+Die App kann dich gelegentlich fragen, ob du sie im Play Store bewerten möchtest. Diese Abfrage wird von Google Play selbst dargestellt und abgewickelt; ich erfahre nicht, ob oder wie du bewertest.
+
+### Empfänger und Übermittlung in die USA
+
+Die genannten Dienste — Firebase Authentication, Cloud Firestore, Firebase Crashlytics, Firebase App Check und Google Play — werden von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, bereitgestellt. Google ist für mich als Auftragsverarbeiter nach Art. 28 DSGVO tätig.
+
+Dabei kann es zu einer Übermittlung von Daten an Google LLC in die USA kommen. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert, sodass ein Angemessenheitsbeschluss der Europäischen Kommission nach Art. 45 DSGVO als Grundlage der Übermittlung besteht. Ergänzend gelten die Standardvertragsklauseln der Kommission nach Art. 46 Abs. 2 lit. c DSGVO.
+
+Darüber hinaus gebe ich deine Daten nicht weiter, verkaufe sie nicht und nutze sie nicht für Werbung.
+
+### Deine Rechte
+
+Du hast das Recht,
+
+*   Auskunft über die zu dir gespeicherten Daten zu verlangen (Art. 15 DSGVO),
+*   unrichtige Daten berichtigen zu lassen (Art. 16 DSGVO),
+*   die Löschung deiner Daten zu verlangen (Art. 17 DSGVO),
+*   die Verarbeitung einschränken zu lassen (Art. 18 DSGVO),
+*   deine Daten in einem gängigen Format zu erhalten oder übertragen zu lassen (Art. 20 DSGVO),
+*   der Verarbeitung auf Grundlage berechtigter Interessen zu widersprechen (Art. 21 DSGVO).
+
+Für all das genügt eine formlose Nachricht an die oben genannte E-Mail-Adresse. Die Löschung deines Kontos kannst du außerdem direkt über das Formular unter [Konto löschen](/apps/delete) anstoßen.
+
+Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO), etwa bei der für meinen Wohnsitz zuständigen Behörde.
+
+### Kinder und Jugendliche
+
+Die App richtet sich nicht gezielt an Kinder. Für eine Anmeldung mit einem Google-Konto solltest du mindestens 16 Jahre alt sein; jüngere Nutzerinnen und Nutzer benötigen dafür die Zustimmung der Erziehungsberechtigten (Art. 8 DSGVO). Ohne Anmeldung ist die App uneingeschränkt und ohne Übermittlung persönlicher Daten nutzbar.
+
+### Änderungen
+
+Ändert sich die App, passe ich diese Erklärung an. Es gilt jeweils die hier veröffentlichte Fassung; das Datum oben zeigt den letzten Stand.
+
+### Hinweis
+
+Tatort Logbuch ist eine inoffizielle Fan-App. Sie steht in keiner Verbindung zur ARD, zum Ersten oder zur Tatort-Produktion.
