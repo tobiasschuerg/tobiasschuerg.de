@@ -1,32 +1,85 @@
 ---
-title: "Stundenplan Deluxe Terms & Conditions"
+title: "Stundenplan Deluxe Nutzungsbedingungen"
 url: "/apps/stundenplan/terms"
 ---
 
-## Terms & Conditions
+## Nutzungsbedingungen
 
-By downloading or using the app, these terms will automatically apply to you – you should make sure therefore that you read them carefully before using the app. You're not allowed to copy, or modify the app, any part of the app, or our trademarks in any way. You're not allowed to attempt to extract the source code of the app, and you also shouldn't try to translate the app into other languages, or make derivative versions. The app itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Tobias Schürg.
+Diese Bedingungen regeln die Nutzung der Android-App **Stundenplan Deluxe** und der kostenpflichtigen Ausgabe **Stundenplan Deluxe Plus**. Mit dem Herunterladen und Verwenden der App stimmst du ihnen zu.
 
-Tobias Schürg is committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the app or its services without making it very clear to you exactly what you're paying for.
+Stand: 7. September 2026
 
-The Stundenplan Deluxe app stores and processes personal data that you have provided to us, in order to provide my Service. It's your responsibility to keep your phone and access to the app secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device. It could make your phone vulnerable to malware/viruses/malicious programs, compromise your phone's security features and it could mean that the Stundenplan Deluxe app won't work properly or at all.
+### Anbieter
 
-You should be aware that there are certain things that Tobias Schürg will not take responsibility for. Certain functions of the app will require the app to have an active internet connection. The connection can be Wi-Fi, or provided by your mobile network provider, but Tobias Schürg cannot take responsibility for the app not working at full functionality if you don't have access to Wi-Fi, and you don't have any of your data allowance left.
+Tobias Schürg\
+Bodenseestraße 103\
+88048 Friedrichshafen\
+Deutschland
 
-If you're using the app outside of an area with Wi-Fi, you should remember that your terms of the agreement with your mobile network provider will still apply. As a result, you may be charged by your mobile provider for the cost of data for the duration of the connection while accessing the app, or other third party charges. In using the app, you're accepting responsibility for any such charges, including roaming data charges if you use the app outside of your home territory (i.e. region or country) without turning off data roaming. If you are not the bill payer for the device on which you're using the app, please be aware that we assume that you have received permission from the bill payer for using the app.
+E-Mail: {{< mail >}}
 
-Along the same lines, Tobias Schürg cannot always take responsibility for the way you use the app i.e. You need to make sure that your device stays charged – if it runs out of battery and you can't turn it on to avail the Service, Tobias Schürg cannot accept responsibility.
+### Was die App ist
 
-With respect to Tobias Schürg's responsibility for your use of the app, when you're using the app, it's important to bear in mind that although we endeavour to ensure that it is updated and correct at all times, we do rely on third parties to provide information to us so that we can make it available to you. Tobias Schürg accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the app.
+Stundenplan Deluxe ist eine App zur Verwaltung des eigenen Stundenplans. Du kannst Fächer, Unterrichtsstunden, Räume, Prüfungen, Aufgaben und Noten erfassen, dich an Termine erinnern lassen und dein Telefon während des Unterrichts automatisch stummschalten.
 
-At some point, we may wish to update the app. The app is currently available on Android – the requirements for system (and for any additional systems we decide to extend the availability of the app to) may change, and you'll need to download the updates if you want to keep using the app. Tobias Schürg does not promise that it will always update the app so that it is relevant to you and/or works with the Android version that you have installed on your device. However, you promise to always accept updates to the application when offered to you, We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must stop using the app, and (if needed) delete it from your device.
+Die App ist ein privat entwickeltes Hilfsmittel. Sie steht in **keiner Verbindung zu deiner Schule, Hochschule oder einer Bildungsbehörde** und ist kein offizielles Verwaltungssystem. Angaben aus der App ersetzen keine verbindliche Auskunft deiner Einrichtung.
 
-**Changes to This Terms and Conditions**
+### Kostenlose Version und Plus
 
-I may update our Terms and Conditions from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Terms and Conditions on this page. These changes are effective immediately after they are posted on this page.
+Die Grundversion ist kostenlos und wird durch Werbung finanziert. Einzelne Funktionen sind in ihr eingeschränkt.
 
-**Contact Us**
+**Stundenplan Deluxe Plus** entfernt die Werbung und hebt diese Einschränkungen auf. Der Kauf läuft über Google Play; es gelten zusätzlich die dortigen Bedingungen. Für Widerruf, Erstattung und Kündigung eines Abonnements ist Google Play zuständig; laufende Abonnements verwaltest du in deinem Google-Konto.
 
-If you have any questions or suggestions about my Terms and Conditions, do not hesitate to contact me at {{< mail >}}.
+Die Kosten deiner Internetverbindung trägst du in beiden Fällen selbst.
 
-This Terms and Conditions page was generated by [App Privacy Policy Generator](https://app-privacy-policy-generator.firebaseapp.com/)
+### Konto und Synchronisation
+
+Die App lässt sich ohne Konto nutzen; die Daten bleiben dann auf deinem Gerät. Für die Synchronisation zwischen mehreren Geräten kannst du dir ein Konto anlegen.
+
+Du bist dafür verantwortlich, deine Zugangsdaten geheim zu halten. Für Aktivitäten, die über dein Konto erfolgen, bist du verantwortlich.
+
+### Deine Daten sind deine Sache
+
+Die Inhalte, die du erfasst, gehören dir. Ich beanspruche keine Rechte daran und werte sie nicht inhaltlich aus.
+
+Sichere dir wichtige Daten trotzdem zusätzlich. Ein Gerätewechsel, ein Defekt oder eine gelöschte Installation können Daten unwiederbringlich verlieren lassen, wenn keine Synchronisation aktiv ist.
+
+### Nutzung
+
+Du darfst die App für private Zwecke nutzen. Nicht gestattet ist es, die App oder Teile davon zu kopieren, zu verändern, zurückzuentwickeln, daraus abgeleitete Versionen zu erstellen oder Marken und Kennzeichen zu verwenden. Alle Rechte an der App verbleiben bei mir.
+
+Ebenfalls nicht gestattet ist es, die Werbeeinblendungen der kostenlosen Version zu umgehen oder zu manipulieren.
+
+### Verfügbarkeit und Änderungen
+
+Die App wird in meiner Freizeit entwickelt. Es besteht kein Anspruch auf Verfügbarkeit, auf bestimmte Funktionen oder auf Weiterentwicklung. Ich kann Funktionen ändern, einschränken oder den Betrieb einstellen.
+
+Wird der Synchronisationsdienst eingestellt, informiere ich mit angemessenem Vorlauf, damit du deine Daten sichern kannst. Bereits gezahlte Beträge für einen noch nicht abgelaufenen Abrechnungszeitraum werden in diesem Fall anteilig erstattet.
+
+### Haftung
+
+Für Vorsatz und grobe Fahrlässigkeit hafte ich nach den gesetzlichen Vorschriften, ebenso bei Verletzung von Leben, Körper oder Gesundheit sowie nach dem Produkthaftungsgesetz.
+
+Bei einfacher Fahrlässigkeit hafte ich nur bei Verletzung einer wesentlichen Vertragspflicht, deren Erfüllung die ordnungsgemäße Nutzung überhaupt erst ermöglicht und auf deren Einhaltung du vertrauen darfst; in diesem Fall ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt.
+
+Für verpasste Termine, Prüfungen oder Abgabefristen hafte ich nicht. Erinnerungen hängen von den Einstellungen deines Geräts ab — Energiesparfunktionen, Stummschaltung oder entzogene Berechtigungen können dazu führen, dass eine Benachrichtigung nicht erscheint. Verlasse dich bei wichtigen Terminen nicht allein auf die App.
+
+### Minderjährige
+
+Die App richtet sich an Schülerinnen und Schüler. Bist du noch nicht volljährig, nutze die App bitte im Einvernehmen mit deinen Erziehungsberechtigten. Für ein Konto und für Käufe gilt das ausdrücklich.
+
+### Datenschutz
+
+Welche Daten die App verarbeitet, steht in der [Datenschutzerklärung](/apps/stundenplan/policy).
+
+### Änderungen dieser Bedingungen
+
+Ich kann diese Bedingungen ändern, etwa wenn sich die App oder die Rechtslage ändert. Es gilt die hier veröffentlichte Fassung; das Datum oben zeigt den letzten Stand. Nutzt du die App weiter, gelten die geänderten Bedingungen als angenommen.
+
+### Schlussbestimmungen
+
+Es gilt deutsches Recht. Ist eine Bestimmung dieser Bedingungen unwirksam, bleiben die übrigen davon unberührt.
+
+### Kontakt
+
+Fragen zu diesen Bedingungen gerne an die oben genannte E-Mail-Adresse.
