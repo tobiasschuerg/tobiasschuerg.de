@@ -60,7 +60,7 @@ Die App erinnert dich auf Wunsch an Unterricht, Prüfungen und Aufgaben. Diese E
 
 Die kostenlose Version zeigt Werbebanner über **Google AdMob**, bereitgestellt von Google Ireland Limited.
 
-Bevor Werbung geladen wird, fragt dich die App nach deiner **Einwilligung**. Erst wenn du zustimmst, wird personalisierte Werbung ausgeliefert; dabei verarbeitet Google unter anderem deine Werbe-ID, deine IP-Adresse und Angaben zu deinem Gerät. Stimmst du nicht zu, erhältst du ausschließlich **nicht-personalisierte** Werbung, die ohne ein Profil über dich auskommt.
+Bevor Werbung geladen wird, fragt dich die App in einem Dialog nach deiner **Einwilligung** — dort entscheidest du auch über die Nutzungsanalyse weiter unten. Erst wenn du zustimmst, wird personalisierte Werbung ausgeliefert; dabei verarbeitet Google unter anderem deine Werbe-ID, deine IP-Adresse und Angaben zu deinem Gerät. Stimmst du nicht zu, erhältst du ausschließlich **nicht-personalisierte** Werbung, die ohne ein Profil über dich auskommt.
 
 Deine Entscheidung kannst du jederzeit in den Einstellungen der App ändern; dort lässt sich der Dialog erneut öffnen.
 
@@ -82,7 +82,9 @@ Stürzt die App ab oder tritt ein schwerer Fehler auf, wird ein Fehlerbericht ü
 
 ### Nutzungsanalyse
 
-Die App verwendet **Firebase Analytics**, um zu verstehen, welche Funktionen tatsächlich genutzt werden. Neben den von Google standardmäßig erfassten Angaben — Gerätetyp, Sprache, ungefähre Region, Sitzungen und eine Installations-Kennung — werden dabei Ereignisse gemeldet, wenn du bestimmte Dinge anlegst oder änderst.
+Die App kann **Firebase Analytics** verwenden, um zu verstehen, welche Funktionen tatsächlich genutzt werden. Das geschieht **nur, wenn du zugestimmt hast** — gefragt wirst du im selben Dialog wie bei der Werbung. Ohne deine Zustimmung findet keine Nutzungsanalyse statt.
+
+Stimmst du zu, werden neben den von Google standardmäßig erfassten Angaben — Gerätetyp, Sprache, ungefähre Region, Sitzungen und eine Installations-Kennung — Ereignisse gemeldet, wenn du bestimmte Dinge anlegst oder änderst.
 
 Damit du weißt, was das konkret bedeutet: Zu einigen dieser Ereignisse werden auch die von dir vergebenen **Bezeichnungen** übermittelt, nämlich
 
@@ -92,7 +94,7 @@ Damit du weißt, was das konkret bedeutet: Zu einigen dieser Ereignisse werden a
 
 Bist du angemeldet, wird außerdem deine Nutzerkennung an Analytics übergeben, sodass sich diese Ereignisse deinem Konto zuordnen lassen. Noten, Aufgabeninhalte und der Inhalt von Notizen werden **nicht** übermittelt.
 
-**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO. Du kannst der Verarbeitung nach Art. 21 DSGVO widersprechen; eine formlose Nachricht an die oben genannte Adresse genügt.
+**Rechtsgrundlage** ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG — Analytics greift dafür auf Informationen auf deinem Endgerät zu. Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, an derselben Stelle in den Einstellungen wie die zur Werbung.
 
 ### Empfänger und Übermittlung in die USA
 
