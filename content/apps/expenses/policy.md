@@ -79,10 +79,11 @@ Fehlerberichte enthalten keine Ausgaben und keine Gruppeninhalte.
 
 ### Nutzungsanalyse
 
-Die App verwendet **Firebase Analytics**. Erhoben werden dabei die von Google standardmäßig erfassten Angaben — etwa Gerätetyp, Sprache, ungefähre Region und eine Installations-Kennung — sowie zwei eigene Ereignisse:
+Die App verwendet **Firebase Analytics**. Erhoben werden dabei die von Google standardmäßig erfassten Angaben — etwa Gerätetyp, Sprache, ungefähre Region, Sitzungsdauer und eine Installations-Kennung — sowie ein Ereignis beim Start der App.
 
-*   beim Anlegen einer Ausgabe deren **Betrag**; die Bezeichnung der Ausgabe wird ausdrücklich **nicht** übermittelt,
-*   beim Anlegen einer Gruppe deren **Name**.
+**Inhalte deiner Abrechnungen werden nicht übermittelt:** weder Beträge noch Bezeichnungen von Ausgaben und auch keine Namen von Gruppen.
+
+Übergeben wird an Analytics allerdings die Push-Kennung deines Geräts (siehe Abschnitt Benachrichtigungen) als sogenannte Nutzereigenschaft. Sie verknüpft die Analysedaten mit deinem Gerät, sagt für sich genommen aber nichts über dich oder deine Ausgaben aus.
 
 Es findet keine Werbung und kein Weiterverkauf dieser Daten statt.
 
