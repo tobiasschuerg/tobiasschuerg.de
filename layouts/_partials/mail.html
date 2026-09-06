@@ -1,0 +1,4 @@
+{{- /* Contact address with a decoy segment hidden by CSS. See the note in
+       _shortcodes/mail.html for why neither entities nor JS work here. */ -}}
+{{- $m := site.Params.contact_email -}}
+{{- printf "<span class=\"mail\">%s<span class=\"mail-x\">.KEIN-SPAM</span>@%s</span>" (index (split $m "@") 0) (index (split $m "@") 1) | safeHTML -}}

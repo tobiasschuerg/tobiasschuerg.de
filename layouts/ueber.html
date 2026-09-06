@@ -6,7 +6,7 @@
   <div class="term-out">Tobias Sch&uuml;rg &mdash; Entwickler, baut kleine Apps.</div>
 
   <div class="term-line term-gap"><span class="term-sig">$</span> cat kontakt.txt</div>
-  <div class="term-out">github:&#160;&#160;<a href="https://github.com/{{ .Site.Params.github_username }}">github.com/{{ .Site.Params.github_username }}</a><br>mail:&#160;&#160;&#160;&#160;<a href="mailto:{{ .Site.Params.contact_email }}">{{ .Site.Params.contact_email }}</a></div>
+  <div class="term-out">github:&#160;&#160;<a href="https://github.com/{{ .Site.Params.github_username }}">github.com/{{ .Site.Params.github_username }}</a><br>mail:&#160;&#160;&#160;&#160;{{ partial "mail.html" . }}</div>
 
   <div class="term-line term-gap"><span class="term-sig">$</span> ls ~/projekte</div>
   <div class="term-out">{{ range $i, $p := (sort (where .Site.RegularPages "Section" "projects") ".Params.weight") }}{{ if $i }}<br>{{ end }}{{ urlize $p.Title }}{{ end }}</div>
@@ -192,7 +192,9 @@
 (function () {
     var PROJECTS = {{ $items }};
     var GITHUB   = {{ .Site.Params.github_username }};
-    var MAIL     = {{ .Site.Params.contact_email }};
+    var MAIL     = {{ index (split .Site.Params.contact_email "@") 0 }}
+                 + String.fromCharCode(64)
+                 + {{ index (split .Site.Params.contact_email "@") 1 }};
 
     var input   = document.getElementById('term-input');
     var typed   = document.getElementById('term-typed');

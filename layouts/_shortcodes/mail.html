@@ -1,0 +1,13 @@
+{{- /* Contact address for use in content files.
+
+       Entities are not an option: Hugo renders them, but the minifier
+       decodes them straight back to plain text, and CI builds with
+       --minify. JS is not an option either — § 5 DDG wants the contact
+       permanently available, and a JS-only address disappears without it.
+
+       So a decoy segment stays in the markup and out of the rendering.
+       Browsers exclude display:none text from a selection, so a human
+       still copies the correct address while a scraper reading the raw
+       HTML gets a poisoned one. No mailto, because an href would hand
+       the plain address over regardless. */ -}}
+{{- partial "mail.html" . -}}

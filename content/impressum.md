@@ -12,7 +12,7 @@ Bodenseestraße 103\
 Deutschland
 
 **Kontakt**\
-E-Mail: [kontakt@molemail.eu](mailto:kontakt@molemail.eu)
+E-Mail: {{< mail >}}
 
 ## Verantwortlich für den Inhalt
 

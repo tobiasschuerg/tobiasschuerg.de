@@ -100,6 +100,10 @@
         input, button, textarea, select { font: inherit; }
         p, h1, h2, h3 { overflow-wrap: break-word; }
 
+        /* Decoy segment inside contact addresses; see _shortcodes/mail.html.
+           display:none keeps it out of selections, so copy/paste stays correct. */
+        .mail-x { display: none; }
+
         ::selection { background: var(--yellow); color: var(--bg); }
 
         a { color: var(--blue); }
