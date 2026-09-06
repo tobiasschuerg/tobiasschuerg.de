@@ -12,11 +12,11 @@ Stand: 7. September 2026
 ### Verantwortlicher
 
 Tobias Schürg\
-[Straße Hausnummer]\
-[PLZ Ort]\
+Bodenseestraße 103\
+88048 Friedrichshafen\
 Deutschland
 
-E-Mail: [datenschutz@tobiasschuerg.de]
+E-Mail: {{< mail >}}
 
 Ein Datenschutzbeauftragter ist nicht bestellt; dazu besteht keine gesetzliche Verpflichtung.
 

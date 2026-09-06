@@ -12,11 +12,11 @@ Stand: 7. September 2026
 ### Anbieter
 
 Tobias Schürg\
-[Straße Hausnummer]\
-[PLZ Ort]\
+Bodenseestraße 103\
+88048 Friedrichshafen\
 Deutschland
 
-E-Mail: [kontakt@tobiasschuerg.de]
+E-Mail: {{< mail >}}
 
 ### Was die App ist
 
