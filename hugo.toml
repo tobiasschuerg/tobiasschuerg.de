@@ -28,7 +28,15 @@ disableKinds = ["taxonomy", "term", "RSS"]
       url = "/about/"
       weight = 20
 
+  # English is prepared but not published yet. To enable it:
+  #  1. remove 'disabled' below
+  #  2. add English translations: content/<name>.en.md for each page,
+  #     incl. content/projects/*.en.md (the cards read .Site.RegularPages,
+  #     which is per-language, so untranslated projects show an empty grid)
+  #  3. add a language switcher to layouts/_default/baseof.html and change
+  #     the menu/card URLs to be language-aware (relLangURL)
   [languages.en]
+    disabled = true
     languageCode = 'en-US'
     languageName = 'English'
     title = 'tobiasschuerg.de'
