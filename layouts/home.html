@@ -1,45 +1,51 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<div class="screen-label">LEVEL SELECT</div>
 
-<!-- Display intro text first -->
 {{ if eq .Site.Language.Lang "de" }}
-<p>Eine Sammlung privater Side-Projects.</p>
+<p class="screen-intro">Eine Sammlung privater Side-Projects.</p>
 {{ else }}
-<p>A collection of side projects.</p>
+<p class="screen-intro">A collection of side projects.</p>
 {{ end }}
 
-<!-- Display projects as cards -->
-<div class="project-grid">
-  {{ $projects := where .Site.RegularPages "Section" "projects" }}
-  {{ range sort $projects ".Params.weight" }}
-    <div class="project-card">
-      <h3>{{ .Title }}</h3>
-      
-      <!-- Project description based on language -->
-      {{ if .Params.project_description }}
-        {{ if eq .Site.Language.Lang "de" }}
-          <p>{{ .Params.project_description.de }}</p>
+<div class="levels">
+  {{ range sort (where .Site.RegularPages "Section" "projects") ".Params.weight" }}
+    <div class="level cabinet acc-{{ .Params.accent | default "blue" }}">
+      <div class="level-shot">
+        {{ with .Params.screenshot }}
+          <img src="{{ . | relURL }}" alt="Screenshot: {{ $.Title }}" width="140" height="280" loading="lazy">
         {{ else }}
-          <p>{{ .Params.project_description.en }}</p>
+          <div class="shot-empty" aria-hidden="true">Screenshot folgt</div>
         {{ end }}
-      {{ end }}
-      
-      <!-- Project links -->
-      {{ if .Params.links }}
-        <div class="project-links">
-          {{ range .Params.links }}
-            <a href="{{ .url }}"{{ if .primary }} class="primary-link"{{ end }}>
-              {{ if eq $.Site.Language.Lang "de" }}
-                {{ .text.de }}
+      </div>
+
+      <div class="level-body">
+        <h2 class="level-title">{{ .Title }}</h2>
+
+        {{ with .Params.project_description }}
+          <p class="level-desc">
+            {{ if eq $.Site.Language.Lang "de" }}{{ .de }}{{ else }}{{ .en }}{{ end }}
+          </p>
+        {{ end }}
+
+        {{ with .Params.links }}
+          <div class="level-links">
+            {{ range . }}
+              {{ $label := cond (eq $.Site.Language.Lang "de") .text.de .text.en }}
+              {{ if .primary }}
+                <a class="btn btn-{{ .color | default "green" }}" href="{{ .url }}">&#9654; {{ $label }}</a>
               {{ else }}
-                {{ .text.en }}
+                <a href="{{ .url }}">{{ $label }}</a>
               {{ end }}
-            </a>
-          {{ end }}
-        </div>
-      {{ end }}
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
     </div>
   {{ end }}
-</div>
 
+  <div class="level-locked">
+    <div class="pixel">&#128274; LEVEL {{ add (len (where .Site.RegularPages "Section" "projects")) 1 }} &mdash; LOCKED</div>
+    <p>{{ if eq .Site.Language.Lang "de" }}N&auml;chstes Projekt in Arbeit &hellip;{{ else }}Next project in progress &hellip;{{ end }}</p>
+  </div>
+</div>
 {{ end }}

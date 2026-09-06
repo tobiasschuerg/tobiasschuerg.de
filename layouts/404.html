@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <div class="screen-label">GAME OVER</div>
+
+  <div class="doc-body gameover">
+    <p class="gameover-code pixel">404</p>
+    <p>Diese Seite gibt es nicht (mehr).</p>
+    <p class="gameover-hint">Kein Continue &mdash; aber das Level Select ist noch da.</p>
+    <a class="btn" href="{{ .Site.Home.RelPermalink }}">&#9654; LEVEL SELECT</a>
+  </div>
+
+<style>
+    .gameover { text-align: center; padding: 44px 32px; }
+    .gameover-code {
+        font-size: 34px;
+        line-height: 1.6;
+        color: var(--red);
+        margin: 0 0 20px;
+    }
+    .gameover-hint { color: var(--dim); margin-bottom: 28px; }
+    .gameover .btn { display: inline-block; }
+    @media (max-width: 640px) { .gameover-code { font-size: 24px; } }
+</style>
+{{ end }}

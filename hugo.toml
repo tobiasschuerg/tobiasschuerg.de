@@ -8,6 +8,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
 
 [params]
   github_username = "tobiasschuerg"
+  display_name = "Tobias Schürg"
 
 [languages]
   [languages.de]

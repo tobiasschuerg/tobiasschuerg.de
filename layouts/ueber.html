@@ -1,0 +1,224 @@
+{{ define "main" }}
+<div class="screen-label">PLAYER 1</div>
+
+<div class="doc-body term" id="term">
+  <div class="term-line"><span class="term-sig">$</span> whoami</div>
+  <div class="term-out">Tobias Sch&uuml;rg &mdash; Entwickler, baut kleine Apps.</div>
+
+  <div class="term-line term-gap"><span class="term-sig">$</span> cat kontakt.txt</div>
+  <div class="term-out">github: <a href="https://github.com/{{ .Site.Params.github_username }}">github.com/{{ .Site.Params.github_username }}</a></div>
+
+  {{ with .Content }}<div class="term-note">{{ . }}</div>{{ end }}
+
+  <div id="term-history" aria-live="polite"></div>
+
+  <div class="term-prompt" id="term-prompt">
+    <span class="term-sig">$</span><span class="term-typed" id="term-typed"></span><span class="term-caret" aria-hidden="true"></span>
+    <label class="term-sr" for="term-input">Terminal-Eingabe</label>
+    <input id="term-input" class="term-input" autocomplete="off" autocapitalize="off"
+           autocorrect="off" spellcheck="false">
+  </div>
+</div>
+
+<div class="panic" id="panic" hidden>
+  <div class="panic-face pixel">:(</div>
+  <div class="panic-title pixel">KERNEL PANIC</div>
+  <p class="panic-body">rm -rf: alles gel&ouml;scht. Na toll.<br>Fehlercode: 0x8BADF00D &mdash; PC LOAD LETTER</p>
+  <p class="panic-note">Ein Speicherabbild wurde nicht erstellt, weil kein Speicher mehr da ist.</p>
+  <button type="button" class="btn" id="panic-reboot">&#9654; NEU STARTEN</button>
+</div>
+
+<style>
+    .term { line-height: 2; }
+    .term-sig { color: var(--green-dk); margin-right: 8px; }
+    .term-out { color: var(--fg); }
+    .term-gap { margin-top: 14px; }
+    .term-note { margin-top: 14px; color: var(--muted); }
+    .term-note p { margin: 0 0 8px; }
+    .term-err { color: var(--orange); white-space: pre-wrap; }
+
+    .term-prompt {
+        margin-top: 14px;
+        display: flex;
+        align-items: baseline;
+        gap: 0;
+        cursor: text;
+        position: relative;
+    }
+    .term-typed { color: var(--fg); white-space: pre-wrap; word-break: break-word; }
+    .term-caret {
+        display: inline-block;
+        width: 9px;
+        height: 16px;
+        background: var(--green);
+        align-self: center;
+        animation: term-blink 1.1s step-end infinite;
+    }
+    @keyframes term-blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+
+    .term-input {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        border: 0;
+        padding: 0;
+    }
+    .term-sr {
+        position: absolute;
+        width: 1px; height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+    .term-prompt:focus-within { outline: 2px solid var(--green); outline-offset: 6px; }
+
+    .panic {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        background: var(--card);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        text-align: center;
+    }
+    .panic-face {
+        font-size: 28px;
+        color: var(--fg);
+        background: var(--red);
+        padding: 14px 24px;
+        box-shadow: 8px 8px 0 #000;
+    }
+    .panic-title { font-size: 14px; color: var(--yellow); margin-top: 32px; }
+    .panic-body {
+        color: var(--body);
+        font-size: 14px;
+        line-height: 1.9;
+        max-width: 52ch;
+        margin: 16px 0 0;
+    }
+    .panic-note { color: var(--dim); font-size: 13px; margin: 8px 0 0; }
+    #panic-reboot { margin-top: 36px; border: 0; cursor: pointer; }
+
+    @media (max-width: 640px) {
+        .panic-face { font-size: 20px; }
+        .panic-title { font-size: 11px; }
+    }
+</style>
+
+<script>
+(function () {
+    var input   = document.getElementById('term-input');
+    var typed   = document.getElementById('term-typed');
+    var history = document.getElementById('term-history');
+    var prompt  = document.getElementById('term-prompt');
+    var panic   = document.getElementById('panic');
+    var reboot  = document.getElementById('panic-reboot');
+    if (!input) return;
+
+    var MAX_LINES = 6;
+
+    function errorFor(cmd) {
+        var c = cmd.trim().split(/\s+/)[0];
+        var msgs = [
+            'zsh: command not found: ' + c,
+            c + ': Segmentation fault (core dumped)',
+            c + ': Permission denied — nice try.',
+            'ERROR 418: I’m a teapot.',
+            c + ': kernel panic! (nur ein Scherz)'
+        ];
+        return msgs[Math.floor(Math.random() * msgs.length)];
+    }
+
+    function pingFor(cmd) {
+        var host = cmd.trim().split(/\s+/)[1] || 'tobiasschuerg.de';
+        var t = function () { return (Math.random() * 30 + 8).toFixed(1); };
+        return 'PING ' + host + ' (127.0.0.1): 56 data bytes\n'
+            + '64 bytes: icmp_seq=0 ttl=64 time=' + t() + ' ms\n'
+            + '64 bytes: icmp_seq=1 ttl=64 time=' + t() + ' ms\n'
+            + '64 bytes: icmp_seq=2 ttl=64 time=' + t() + ' ms\n'
+            + '--- ' + host + ' ping statistics ---\n'
+            + '3 packets transmitted, 3 received, 0.0% packet loss';
+    }
+
+    /* textContent throughout: whatever is typed is data, never markup. */
+    function push(cmd, out) {
+        var line = document.createElement('div');
+        line.className = 'term-line term-gap';
+        var sig = document.createElement('span');
+        sig.className = 'term-sig';
+        sig.textContent = '$';
+        line.appendChild(sig);
+        var c = document.createElement('span');
+        c.className = 'term-out';
+        c.textContent = cmd;
+        line.appendChild(c);
+
+        var err = document.createElement('div');
+        err.className = 'term-err';
+        err.textContent = out;
+
+        history.appendChild(line);
+        history.appendChild(err);
+
+        while (history.children.length > MAX_LINES * 2) {
+            history.removeChild(history.children[0]);
+        }
+    }
+
+    function clearHistory() {
+        while (history.firstChild) history.removeChild(history.firstChild);
+    }
+
+    function setPanic(on) {
+        panic.hidden = !on;
+        document.body.style.overflow = on ? 'hidden' : '';
+        if (on) { reboot.focus(); } else { input.focus({ preventScroll: true }); }
+    }
+
+    input.addEventListener('input', function () { typed.textContent = input.value; });
+
+    input.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        var cmd = input.value.trim();
+        if (!cmd) return;
+
+        if (/^rm\s+(-rf|-fr)\b/.test(cmd)) {
+            input.value = ''; typed.textContent = '';
+            setPanic(true);
+            return;
+        }
+        if (cmd === 'clear') {
+            clearHistory();
+        } else if (/^ping\b/.test(cmd)) {
+            push(cmd, pingFor(cmd));
+        } else {
+            push(cmd, errorFor(cmd));
+        }
+        input.value = '';
+        typed.textContent = '';
+    });
+
+    prompt.addEventListener('click', function () { input.focus(); });
+
+    reboot.addEventListener('click', function () {
+        clearHistory();
+        setPanic(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !panic.hidden) { clearHistory(); setPanic(false); }
+    });
+
+    /* Focus only where there is a real keyboard: on touch this would throw
+       up the on-screen keyboard the moment the page opens. */
+    if (window.matchMedia('(pointer:fine)').matches) {
+        input.focus({ preventScroll: true });
+    }
+}());
+</script>
+{{ end }}
