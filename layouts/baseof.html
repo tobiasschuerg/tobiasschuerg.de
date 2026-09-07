@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "de" }}">
+<html lang="{{ .Site.Language.Locale | default "de" }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ .Site.Params.description }}">
+    {{- $title := cond .IsHome .Site.Title (printf "%s - %s" .Title .Site.Title) }}
+    {{- /* Per-page `description` front matter; the site tagline is only the
+           fallback, so pages don't all share one meta description. */}}
+    {{- $desc := .Description | default .Site.Params.description }}
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $desc }}">
     <meta name="theme-color" content="#1a1c2c">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{- /* Enforces the "no third-party requests" promise in /datenschutz/:
+           a stray Google Font or analytics snippet fails loudly instead of
+           silently contradicting the privacy policy. It is NOT meaningful
+           XSS hardening — the inline <style> block still requires
+           'unsafe-inline' for styles. Scripts do not: the terminal loads
+           from assets/, so script-src stays at 'self' and must keep doing
+           so — never add an inline <script> to a layout.
+           frame-ancestors and report-uri
+           are omitted because a <meta> CSP cannot carry them.
+           Production only: it would block hugo server's LiveReload socket. */}}
+    {{- if hugo.IsProduction }}
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    {{- end }}
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    {{- /* Hand-rolled instead of _internal/opengraph.html: one image for the
+           whole site, no article metadata, nothing to configure. */}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:locale" content="{{ replace .Site.Language.Locale "-" "_" }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $desc }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ "og-image.png" | absURL }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pixel-Pizzastück, darunter {{ .Site.Params.display_name }} und {{ .Site.Title }}">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -121,6 +157,21 @@
             letter-spacing: 0;
         }
 
+        /* Off-screen until focused, so keyboard users can jump the nav. */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            z-index: 10;
+            font-family: var(--pixel);
+            font-size: 10px;
+            background: var(--yellow);
+            color: var(--bg);
+            padding: 10px 14px;
+            text-decoration: none;
+        }
+        .skip-link:focus { left: 8px; top: 8px; color: var(--bg); }
+
         /* ---- Header ------------------------------------------------- */
         .site-head {
             padding: 56px 48px 36px;
@@ -170,6 +221,9 @@
 
         .screen-label {
             font-family: var(--pixel);
+            /* This is an h1. Press Start 2P ships one weight, so inheriting
+               the UA's bold would make the browser smear a synthetic one. */
+            font-weight: 400;
             font-size: 16px;
             line-height: 1.7;
             color: var(--blue);
@@ -413,6 +467,7 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#inhalt">{{ if eq .Site.Language.Lang "de" }}Zum Inhalt springen{{ else }}Skip to content{{ end }}</a>
     <header class="site-head">
         <a href="{{ .Site.Home.RelPermalink }}" class="brand">
             <span>{{ .Site.Params.display_name | default .Site.Title }}</span>
@@ -427,7 +482,7 @@
         {{ end }}
     </header>
 
-    <main class="site-main" style="--page-max:{{ .Params.page_max | default (cond .IsHome "1060px" "760px") }}">
+    <main id="inhalt" class="site-main" style="--page-max:{{ .Params.page_max | default (cond .IsHome "1060px" "760px") }}">
         {{ block "main" . }}{{ end }}
     </main>
 

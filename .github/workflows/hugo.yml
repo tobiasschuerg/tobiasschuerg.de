@@ -7,6 +7,9 @@ on:
     branches:
       - master
 
+  # Build-only check: catches a broken template before it reaches master.
+  pull_request:
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -15,6 +18,11 @@ permissions:
   contents: read
   pages: write
   id-token: write
+
+# One deployment at a time, and never cancel one halfway.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 # Default to bash
 defaults:
@@ -26,7 +34,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.148.1
+      HUGO_VERSION: 0.165.0
     steps:
       - name: Install Hugo CLI
         run: |
@@ -34,25 +42,32 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # enableGitInfo dates each page from its last commit,
+          # which a shallow clone does not carry.
+          fetch-depth: 0
       - name: Setup Pages
         id: pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
+          # Empty on pull_request, because Setup Pages is skipped there;
+          # the build then falls back to the baseURL in hugo.toml.
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
-          hugo \
-            --gc \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"          
+          hugo --gc --minify ${BASE_URL:+--baseURL "$BASE_URL/"}
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   # Deployment job
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

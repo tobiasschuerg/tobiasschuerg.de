@@ -3,7 +3,15 @@
 
   <h1 class="doc-title">{{ .Title }}</h1>
 
-  {{ with .Params.doc_meta }}<div class="doc-meta">{{ . }}</div>{{ end }}
+  {{/* "Stand" comes from git, not from prose in the markdown, so it cannot
+       drift away from the last actual edit. */}}
+  {{ $stand := and (not .Params.hide_lastmod) (not .Lastmod.IsZero) }}
+  {{ if or .Params.doc_meta $stand }}
+    <div class="doc-meta">
+      {{ with .Params.doc_meta }}{{ . }}{{ if $stand }}<br>{{ end }}{{ end }}
+      {{ if $stand }}Stand: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod | time.Format ":date_long" }}</time>{{ end }}
+    </div>
+  {{ end }}
 
   <div class="doc-body">
     {{ .Content }}

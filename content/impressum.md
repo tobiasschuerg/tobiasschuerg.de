@@ -1,5 +1,6 @@
 ---
 title: "Impressum"
+description: "Anbieterkennzeichnung nach § 5 DDG für tobiasschuerg.de: Verantwortlicher, Anschrift und Kontakt."
 layout: "page"
 url: "/impressum/"
 ---

@@ -1,13 +1,12 @@
 ---
 title: "Expenses Deluxe Nutzungsbedingungen"
+description: "Nutzungsbedingungen für die Android-App Expenses Deluxe."
 url: "/apps/expenses/terms"
 ---
 
 ## Nutzungsbedingungen
 
 Diese Bedingungen regeln die Nutzung der Android-App **Expenses Deluxe**. Mit dem Herunterladen und Verwenden der App stimmst du ihnen zu.
-
-Stand: 7. September 2026
 
 ### Anbieter
 
