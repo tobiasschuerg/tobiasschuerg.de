@@ -11,12 +11,13 @@ output.
 
 Two things sit outside that. `tools/gen_brand_assets.py` draws the favicon and
 the Open Graph card; it is run by hand, its outputs are committed, and CI never
-touches it. `tools/term_test.mjs` is the one automated test, for the Über
-terminal, and needs only Node.
+touches it. `tools/term_test.mjs` and `tools/pizza_test.mjs` are the two
+automated tests — for the Über terminal and the Pizzeria game — and need only
+Node.
 
-Hugo's own asset pipeline is used in exactly one place: `assets/js/terminal.js`
-is minified and fingerprinted into the build. Everything else — all CSS
-included — is still inline in the templates.
+Hugo's own asset pipeline is used for exactly two files: `assets/js/terminal.js`
+and `assets/js/pizza.js` are minified and fingerprinted into the build.
+Everything else — all CSS included — is still inline in the templates.
 
 The design is an 8-bit arcade treatment: Sweetie-16 palette on `#1a1c2c`,
 Press Start 2P for display type and JetBrains Mono for body, project cards as
@@ -57,10 +58,11 @@ output — anything beyond the `<meta name=generator>` string is a real change.
 
 ```bash
 node tools/term_test.mjs               # the terminal dispatcher (Node only)
+node tools/pizza_test.mjs              # the Pizzeria game (Node only)
 python tools/gen_brand_assets.py       # rewrites the four icon files in static/
 ```
 
-The second needs Python with Pillow; the first needs nothing.
+The last needs Python with Pillow; the tests need nothing.
 
 ## Architecture
 
@@ -217,11 +219,65 @@ A `<div>` attribute rather than a `<script type="application/json">` island
 keeps this out of Go's script-context escaping entirely; `jsonify` **is**
 correct here, unlike in the old inline form.
 
+### The Pizzeria game
+
+`/pizzeria/` is a small arcade game: the ticket names a pizza, you drag the
+right toppings onto the dough, bake, deliver — 60 seconds a shift.
+`content/pizzeria.de.md` is an empty stub whose `layout: "pizzeria"` picks up
+`layouts/pizzeria.html`; the behaviour lives in `assets/js/pizza.js` and is
+loaded as an external, fingerprinted script for the same reason the terminal
+is — an inline `<script>` would need `'unsafe-inline'` in `script-src`.
+
+**The ticket names the pizza, not the recipe.** `MENU` in `pizza.js` holds
+sixteen pizzas, four each at one to four toppings, and `makeOrder()` picks by
+size: one topping until order 3, then two, three from 6, four from 9. Two
+pizzas must never share a recipe — the cookbook could not tell them apart
+either, and the player would be marked wrong for knowing the menu. The test
+checks that.
+
+The cookbook overlay (`#pg-book`, `K` or the button) is the only way to look a
+recipe up, and it **covers the whole cabinet on purpose**: reading and topping
+cannot happen at once, and the clock keeps running. That is the price, so
+there is no extra penalty on top — don't add one.
+
+Two more things about the layout:
+
+- The eight toppings are defined **only** in `pizza.js`; the layout ships two
+  empty bins (`#pg-bin-l`, `#pg-bin-r`) and the tiles are built at load, four
+  per bin. That is also why the markup carries a visible `#pg-nojs` line,
+  hidden once the script runs.
+- Toppings are **dragged**, and the drag is built on Pointer Events, not the
+  HTML5 drag-and-drop API — that API does not exist on touch, and the game has
+  to work on a phone. Hence `touch-action: none` on `.pg-tile` (otherwise the
+  page scrolls instead of the ingredient moving) and `pointer-events: none` on
+  the floating `.pg-ghost` (otherwise it swallows the `pointerup` that has to
+  reach the dough). The tile captures the pointer on `pointerdown`; the drop
+  is a hit test against `#pg-stage`'s bounding box.
+- Keys `1`–`8` put a topping on and take it off again. That is the only
+  keyboard path — the tiles are `<div>`s, not buttons, because a button that
+  does nothing when pressed is worse than no button.
+
+And three traps carried over from the rest of the site:
+
+- **The clock is a `requestAnimationFrame` loop and each step is capped at
+  `MAX_FRAME` (250 ms).** A background tab freezes rAF and resumes with one
+  enormous timestamp jump; without the cap that jump would swallow the whole
+  shift. Capping it means switching tabs pauses the round instead.
+- Start, game over and the cookbook all set `display: flex` and so depend on
+  the `[hidden] { display: none !important }` reset in `baseof.html` — the
+  same trap as the Über terminal's overlays.
+- **No `localStorage`.** `/datenschutz/` promises the site stores nothing, so
+  the record lives in a variable and dies with the page. Adding persistence
+  means changing that document too.
+
+The UI strings, the menu and `pizza.js` are German only — one more item on the
+English checklist in `hugo.toml`. `content/pizzeria.en.md` is just the stub.
+
 ### Styling lives in one file
 
 All global CSS is a single inline `<style>` block in `layouts/baseof.html` —
 no SCSS, no external stylesheet. (`assets/` exists, but only for
-`js/terminal.js`; no CSS goes through it.) This is why `style-src` still needs
+`js/terminal.js` and `js/pizza.js`; no CSS goes through it.) This is why `style-src` still needs
 `'unsafe-inline'` while `script-src` does not. Page-specific styles
 sit in their own `<style>` block inside the relevant layout.
 
@@ -298,10 +354,11 @@ renders an empty grid. `hugo.toml` carries a comment with the full checklist.
 Menu URLs and card links are plain absolute paths (`/about/`), not
 language-aware, so they would also need `relLangURL`.
 
-## Testing the terminal JS
+## Testing the page JS
 
 ```bash
 node tools/term_test.mjs
+node tools/pizza_test.mjs
 ```
 
 Node only, no dependencies, no Hugo build. It reads `assets/js/terminal.js`
@@ -316,8 +373,17 @@ Two things it relies on:
 - It must run against `assets/`, never the built output — Hugo's minifier
   renames `run`.
 
-This is the repo's only automated test. It is not wired into CI; run it after
-touching the terminal.
+`tools/pizza_test.mjs` works the same way for `assets/js/pizza.js`: it injects
+an object exposing the rules (`makeOrder`, `check`, `scoreFor`), the menu, and a
+handle on a running round, and — because the shift clock is a
+`requestAnimationFrame` loop — it stubs `requestAnimationFrame` so it can
+capture the callback and hand in frames itself. A whole 60-second shift
+therefore plays out in milliseconds, including the oven, a correct delivery, a
+botched one and the final whistle. What it cannot cover is the dragging itself;
+that needs a real pointer in a real browser.
+
+These two are the repo's only automated tests. Neither is wired into CI; run
+the matching one after touching either file.
 
 ## Legal pages
 
