@@ -33,10 +33,15 @@ disableKinds = ["taxonomy", "term", "RSS"]
       url = "/"
       weight = 10
     [[languages.de.menu.main]]
+      identifier = "pizzeria"
+      name = "Pizzeria"
+      url = "/pizzeria/"
+      weight = 20
+    [[languages.de.menu.main]]
       identifier = "about"
       name = "Über"
       url = "/about/"
-      weight = 20
+      weight = 30
 
   # English is prepared but not published yet. To enable it:
   #  1. remove 'disabled' below
@@ -45,6 +50,8 @@ disableKinds = ["taxonomy", "term", "RSS"]
   #     which is per-language, so untranslated projects show an empty grid)
   #  3. add a language switcher to layouts/_default/baseof.html and change
   #     the menu/card URLs to be language-aware (relLangURL)
+  #  4. translate layouts/pizzeria.html — the game's UI strings and
+  #     assets/js/pizza.js are German only, the .en.md is just the stub
   [languages.en]
     disabled = true
     locale = 'en-US'
@@ -59,7 +66,12 @@ disableKinds = ["taxonomy", "term", "RSS"]
       url = "/"
       weight = 10
     [[languages.en.menu.main]]
+      identifier = "pizzeria"
+      name = "Pizzeria"
+      url = "/pizzeria/"
+      weight = 20
+    [[languages.en.menu.main]]
       identifier = "about"
       name = "About"
       url = "/about/"
-      weight = 20
+      weight = 30

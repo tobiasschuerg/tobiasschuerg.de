@@ -1,0 +1,341 @@
+{{ define "main" }}
+<h1 class="screen-label">PIZZERIA</h1>
+<p class="screen-intro">Auf dem Bon steht nur der Name. Zutaten aus den K&auml;sten auf den Teig ziehen, backen, ausliefern &mdash; und wer ein Rezept nicht wei&szlig;, schl&auml;gt im Kochbuch nach. Die Uhr l&auml;uft dabei weiter.</p>
+
+<div class="cabinet pg acc-red" id="pg">
+  <div class="pg-hud">
+    <div class="pg-stat"><span>Punkte</span><b id="pg-score">0</b></div>
+    <div class="pg-stat"><span>Zeit</span><b id="pg-time">60</b></div>
+    <div class="pg-stat"><span>Serie</span><b id="pg-combo">x1</b></div>
+    <div class="pg-stat"><span>Rekord</span><b id="pg-best">0</b></div>
+  </div>
+  <div class="pg-track"><span class="pg-fill" id="pg-bar"></span></div>
+
+  <div class="pg-ticket">
+    <div class="pg-ticket-head pixel">BON #<span id="pg-no">1</span> &middot; <span id="pg-customer">&mdash;</span></div>
+    <div class="pg-order pixel" id="pg-pizza">&mdash;</div>
+    <button type="button" class="pg-book-btn" id="pg-book-btn">Kochbuch [K]</button>
+  </div>
+
+  <div class="pg-kitchen">
+    <div class="pg-bin" id="pg-bin-l"></div>
+
+    <div class="pg-stage" id="pg-stage">
+      {{/* Das Bild der Pizza ist reine Zier — was drauf liegt, steht als Text
+           in #pg-have und #pg-msg, deshalb aria-hidden. */}}
+      <canvas id="pg-canvas" width="96" height="96" aria-hidden="true"></canvas>
+      <div class="pg-oven pixel" id="pg-oven" hidden>OFEN</div>
+
+      {{/* Beide Overlays setzen display:flex und h&auml;ngen damit an der
+           [hidden]-Regel in baseof.html; ohne sie stehen sie offen. */}}
+      <div class="pg-veil" id="pg-start" hidden>
+        <p class="pixel pg-veil-title">PIZZA SERVICE</p>
+        <button type="button" class="btn" id="pg-start-btn">&#9654; Start</button>
+      </div>
+      <div class="pg-veil" id="pg-over" hidden>
+        <p class="pixel pg-veil-title">FEIERABEND</p>
+        <p class="pg-final" id="pg-final"></p>
+        <button type="button" class="btn btn-blue" id="pg-again">&#9654; Nochmal</button>
+      </div>
+    </div>
+
+    <div class="pg-bin" id="pg-bin-r"></div>
+  </div>
+
+  <p class="pg-nojs" id="pg-nojs">Dieses Spiel braucht JavaScript. Ohne passiert hier nichts.</p>
+
+  <div class="pg-belag">
+    <div class="pg-belag-head pixel">AUF DER PIZZA</div>
+    <ul class="pg-have" id="pg-have"></ul>
+  </div>
+
+  <p class="pg-msg" id="pg-msg" aria-live="polite"></p>
+
+  <div class="pg-controls">
+    <button type="button" class="btn btn-blue" id="pg-undo" disabled>&#8634; Zur&uuml;ck</button>
+    <button type="button" class="btn" id="pg-action" disabled>&#9654; In den Ofen</button>
+  </div>
+
+  <p class="pg-keys">Zutat auf den Teig ziehen &middot; Tastatur: <b>1</b>&ndash;<b>8</b> auflegen und abnehmen, <b>K</b> Kochbuch, <b>Enter</b> weiter, <b>R&uuml;cktaste</b> zur&uuml;ck</p>
+
+  <div class="pg-book" id="pg-book" hidden>
+    <div class="pg-book-head pixel">KOCHBUCH</div>
+    <div class="pg-book-list" id="pg-book-list"></div>
+    <button type="button" class="btn" id="pg-book-close">&#9654; Zur&uuml;ck an die Arbeit</button>
+  </div>
+</div>
+
+<style>
+    .pg { padding: 22px; position: relative; }
+
+    .pg-hud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 28px;
+        font-family: var(--pixel);
+        font-size: 9px;
+        line-height: 1.7;
+        text-transform: uppercase;
+    }
+    .pg-stat span { color: var(--dim); margin-right: 8px; }
+    .pg-stat b { color: var(--yellow); font-weight: 400; }
+
+    .pg-track {
+        margin-top: 14px;
+        height: 10px;
+        background: var(--bg);
+        border: 2px solid var(--border);
+    }
+    .pg-fill {
+        display: block;
+        height: 100%;
+        width: 100%;
+        background: var(--green);
+    }
+
+    .pg-ticket {
+        margin-top: 20px;
+        background: var(--card-alt);
+        border: 3px solid var(--border);
+        padding: 16px 18px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px 20px;
+    }
+    .pg-ticket-head { font-size: 10px; color: var(--green); }
+    .pg-order {
+        flex: 1 1 auto;
+        font-size: 14px;
+        color: var(--yellow);
+        text-transform: uppercase;
+    }
+    .pg-book-btn {
+        font-family: var(--pixel);
+        font-size: 9px;
+        line-height: 1.7;
+        color: var(--muted);
+        background: none;
+        border: 3px solid var(--border);
+        padding: 8px 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+    .pg-book-btn:hover { color: var(--fg); border-color: var(--muted); }
+
+    /* ---- Küche: Kästen links und rechts, Teig in der Mitte ---------- */
+    .pg-kitchen {
+        margin-top: 20px;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pg-bin {
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Kein <button>: die Kachel wird gezogen, nicht gedrückt. Der
+       Tastaturweg sind die Zifferntasten, siehe .pg-keys. */
+    .pg-tile {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--body);
+        background: var(--card-alt);
+        border: 3px solid var(--border);
+        padding: 8px 10px;
+        cursor: grab;
+        /* Sonst scrollt die Seite, statt die Zutat zu ziehen. */
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    .pg-tile.is-on { border-color: var(--green); color: var(--fg); }
+    .pg-tile.is-off { opacity: 0.45; cursor: default; }
+    .pg-tile.is-held { opacity: 0.35; cursor: grabbing; }
+    .pg-tile-key {
+        font-family: var(--pixel);
+        font-size: 8px;
+        color: var(--dim);
+    }
+    .pg-tile.is-on .pg-tile-key { color: var(--green); }
+
+    /* Die Zutat am Zeiger. Liegt über allem und darf keine Zeigerereignisse
+       schlucken, sonst trifft das pointerup nie den Teig. */
+    .pg-ghost {
+        position: fixed;
+        z-index: 200;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--fg);
+        background: var(--card);
+        border: 3px solid var(--green);
+        padding: 8px 10px;
+        box-shadow: 4px 4px 0 #000;
+    }
+
+    .pg-dot {
+        flex: 0 0 auto;
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--bg);
+        box-shadow: 0 0 0 1px var(--border);
+    }
+
+    .pg-stage {
+        flex: 0 0 auto;
+        position: relative;
+        width: 300px;
+        border: 3px solid var(--border);
+        background: var(--bg);
+        padding: 6px;
+    }
+    .pg-stage.is-target { border-color: var(--green); }
+    .pg-stage canvas {
+        width: 288px;
+        height: 288px;
+        max-width: 100%;
+        image-rendering: pixelated;
+    }
+
+    .pg-oven {
+        position: absolute;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
+        font-size: 10px;
+        color: var(--bg);
+        background: var(--orange);
+        padding: 8px 12px;
+        box-shadow: 4px 4px 0 #000;
+    }
+
+    .pg-veil {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 20px;
+        text-align: center;
+        background: rgba(26, 28, 44, 0.92);
+    }
+    .pg-veil-title { font-size: 12px; color: var(--yellow); margin: 0; }
+    .pg-veil .btn { border: 0; cursor: pointer; }
+    .pg-final { margin: 0; font-size: 13px; color: var(--body); }
+
+    .pg-nojs { margin: 20px 0 0; font-size: 13px; color: var(--muted); }
+
+    .pg-belag { margin-top: 20px; }
+    .pg-belag-head { font-size: 9px; color: var(--dim); }
+    .pg-have {
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+        font-size: 13px;
+        color: var(--body);
+        min-height: 22px;
+    }
+    .pg-have li { display: flex; align-items: center; gap: 8px; }
+    .pg-have-empty { color: var(--dim); }
+
+    .pg-msg {
+        margin: 16px 0 0;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--muted);
+        min-height: 44px;
+    }
+    .pg-msg-good { color: var(--green); }
+    .pg-msg-bad  { color: var(--orange); }
+
+    .pg-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .pg-controls .btn { border: 0; cursor: pointer; }
+    .pg-controls .btn:disabled {
+        background: var(--border);
+        color: var(--dim);
+        cursor: default;
+        transform: none;
+        box-shadow: 4px 4px 0 #000;
+    }
+
+    .pg-keys {
+        margin: 18px 0 0;
+        font-size: 12px;
+        color: var(--dim);
+    }
+    .pg-keys b { color: var(--muted); font-weight: 400; }
+
+    /* ---- Kochbuch --------------------------------------------------- */
+    /* Deckt die ganze Kabine ab: nachschlagen und belegen geht nicht
+       gleichzeitig, und die Uhr läuft weiter. Das ist der Preis. */
+    .pg-book {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 22px;
+        overflow-y: auto;
+        background: var(--card);
+    }
+    .pg-book-head { font-size: 12px; color: var(--yellow); }
+    .pg-book-list {
+        flex: 1 1 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 6px 24px;
+        align-content: start;
+    }
+    .pg-book-group {
+        font-family: var(--pixel);
+        font-size: 8px;
+        color: var(--dim);
+        margin-top: 12px;
+        text-transform: uppercase;
+        grid-column: 1 / -1;
+    }
+    .pg-book-list > .pg-book-group:first-child { margin-top: 0; }
+    .pg-recipe { font-size: 13px; line-height: 1.8; color: var(--body); }
+    .pg-recipe b { color: var(--yellow); font-weight: 400; }
+    .pg-book .btn { align-self: flex-start; border: 0; cursor: pointer; }
+
+    @media (max-width: 760px) {
+        .pg-kitchen { flex-direction: column; }
+        .pg-bin {
+            flex: 0 0 auto;
+            width: 100%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .pg-stage { width: 100%; max-width: 300px; }
+        .pg-stage canvas { width: 100%; height: auto; aspect-ratio: 1; }
+    }
+</style>
+
+{{ $js := resources.Get "js/pizza.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}
