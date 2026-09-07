@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "de" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ .Site.Params.description }}">
+    <meta name="theme-color" content="#1a1c2c">
+
+    <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <style>
+        /* Self-hosted so no visitor data reaches a third party.
+           Press Start 2P and JetBrains Mono, both SIL OFL 1.1
+           (see /fonts/LICENSE.txt). JetBrains Mono is the variable
+           file: one download covers every weight used here. */
+        @font-face {
+            font-family: 'JetBrains Mono';
+            font-style: normal;
+            font-weight: 100 800;
+            font-display: swap;
+            src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'JetBrains Mono';
+            font-style: normal;
+            font-weight: 100 800;
+            font-display: swap;
+            src: url('/fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: 'Press Start 2P';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('/fonts/press-start-2p-latin.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Press Start 2P';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('/fonts/press-start-2p-latin-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        :root {
+            --bg:        #1a1c2c;
+            --card:      #29366f;
+            --card-alt:  #232741;
+            --fg:        #f4f4f0;
+            --body:      #c9d4e4;
+            --muted:     #94b0c2;
+            --dim:       #8a94b8;
+            --border:    #414968;
+
+            --yellow:    #ffcd75;
+            --blue:      #41a6f6;
+            --green:     #38b764;
+            --green-dk:  #5a8f66;
+            --orange:    #ef7d57;
+            --red:       #b13e53;
+            --pink:      #ff8a9e;
+            --purple:    #a684e8;
+            --purple-lt: #c4a8f5;
+
+            --pixel: 'Press Start 2P', 'Courier New', monospace;
+            --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo,
+                     Consolas, monospace;
+
+            --page-max: 1060px;
+            color-scheme: dark;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        * { margin: 0; }
+
+        html { height: 100%; }
+
+        body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--mono);
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Author display rules outrank the UA style for [hidden]; without
+           this, anything given display:flex/block ignores the attribute. */
+        [hidden] { display: none !important; }
+
+        img, picture, video, canvas, svg { display: block; max-width: 100%; }
+        input, button, textarea, select { font: inherit; }
+        p, h1, h2, h3 { overflow-wrap: break-word; }
+
+        /* Decoy segment inside contact addresses; see _shortcodes/mail.html.
+           display:none keeps it out of selections, so copy/paste stays correct. */
+        .mail-x { display: none; }
+
+        ::selection { background: var(--yellow); color: var(--bg); }
+
+        a { color: var(--blue); }
+        a:hover { color: var(--yellow); }
+        a:focus-visible {
+            outline: 3px solid var(--yellow);
+            outline-offset: 3px;
+        }
+
+        /* Press Start 2P is a pixel face: it needs loose leading and never
+           takes negative tracking. */
+        .pixel {
+            font-family: var(--pixel);
+            line-height: 1.7;
+            letter-spacing: 0;
+        }
+
+        /* ---- Header ------------------------------------------------- */
+        .site-head {
+            padding: 56px 48px 36px;
+            text-align: center;
+            border-bottom: 4px solid var(--blue);
+        }
+
+        .brand { text-decoration: none; display: inline-block; }
+        .brand span {
+            font-family: var(--pixel);
+            font-size: 26px;
+            line-height: 1.5;
+            color: var(--yellow);
+            text-transform: uppercase;
+        }
+        .brand:hover span { color: var(--fg); }
+
+        .site-tagline {
+            margin-top: 14px;
+            font-size: 15px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .site-nav {
+            margin-top: 28px;
+            display: flex;
+            gap: 28px;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-family: var(--pixel);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+        .site-nav a { color: var(--fg); text-decoration: none; }
+        .site-nav a:hover { color: var(--green); }
+        .site-nav a[aria-current="page"] { color: var(--green); }
+
+        /* ---- Main --------------------------------------------------- */
+        .site-main {
+            padding: 44px 48px 56px;
+            max-width: var(--page-max);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .screen-label {
+            font-family: var(--pixel);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .screen-intro {
+            margin: 0 0 32px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        /* ---- Accent tokens (one per project) ------------------------ */
+        .acc-yellow { --accent: var(--yellow);  --accent-text: var(--yellow); }
+        .acc-green  { --accent: var(--green);   --accent-text: var(--green); }
+        .acc-blue   { --accent: var(--blue);    --accent-text: var(--blue); }
+        .acc-orange { --accent: var(--orange);  --accent-text: var(--orange); }
+        .acc-red    { --accent: var(--red);     --accent-text: var(--pink); }
+        .acc-purple { --accent: var(--purple);  --accent-text: var(--purple-lt); }
+
+        /* ---- Cabinet (the shared card chrome) ----------------------- */
+        .cabinet {
+            background: var(--card);
+            border: 4px solid var(--accent, var(--border));
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        /* ---- Level select ------------------------------------------- */
+        .levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 28px;
+        }
+
+        .level {
+            padding: 22px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .level-shot {
+            flex: 0 0 auto;
+            border: 3px solid var(--border);
+            background: var(--bg);
+            padding: 6px;
+        }
+        .level-shot img,
+        .level-shot .shot-empty {
+            width: 140px;
+            height: 280px;
+        }
+        .level-shot img { object-fit: cover; }
+
+        /* No screenshot yet: an honest empty slot, not a fake image. */
+        .shot-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            line-height: 1.6;
+            color: var(--dim);
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0 6px,
+                    rgba(65, 73, 104, 0.25) 6px 12px
+                );
+        }
+
+        .level-body {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .level-title {
+            font-family: var(--pixel);
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--accent-text, var(--fg));
+            text-transform: uppercase;
+        }
+
+        .level-desc {
+            margin: 12px 0 18px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--body);
+        }
+
+        .level-links {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 12px;
+        }
+        .level-links a { color: var(--muted); text-decoration: underline; }
+        .level-links a:hover { color: var(--yellow); }
+
+        .level-links a.btn,
+        .btn {
+            font-family: var(--pixel);
+            font-size: 9px;
+            line-height: 1.7;
+            color: var(--bg);
+            background: var(--green);
+            padding: 10px 12px;
+            text-decoration: none;
+            box-shadow: 4px 4px 0 #000;
+            text-transform: uppercase;
+        }
+        .level-links a.btn { color: var(--bg); text-decoration: none; }
+        .level-links a.btn:hover { color: var(--bg); }
+
+        .btn:hover {
+            color: var(--bg);
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+        }
+        .level-links a.btn-blue,   .btn-blue   { background: var(--blue); }
+        .level-links a.btn-purple, .btn-purple { background: var(--purple); }
+
+        .level-locked {
+            border: 4px dashed var(--border);
+            padding: 24px;
+            text-align: center;
+            color: var(--muted);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .level-locked .pixel { font-size: 11px; color: var(--dim); }
+        .level-locked p { margin: 10px 0 0; font-size: 13px; }
+
+        /* ---- Document pages ----------------------------------------- */
+        .back-link {
+            font-family: var(--pixel);
+            font-size: 10px;
+            line-height: 1.7;
+            color: var(--green);
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--yellow); }
+
+        .doc-title {
+            font-family: var(--pixel);
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--blue);
+            margin: 24px 0 8px;
+            text-transform: uppercase;
+        }
+
+        .doc-meta {
+            font-size: 12px;
+            color: var(--dim);
+            margin-bottom: 28px;
+        }
+
+        .doc-body {
+            background: var(--card-alt);
+            border: 4px solid var(--border);
+            padding: 28px 32px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: var(--body);
+        }
+        .doc-body h2, .doc-body h3, .doc-body h4 {
+            font-family: var(--pixel);
+            line-height: 1.8;
+            color: var(--yellow);
+            margin: 32px 0 14px;
+            text-transform: uppercase;
+        }
+        .doc-body h2 { font-size: 13px; }
+        .doc-body h3 { font-size: 11px; color: var(--green); }
+        .doc-body h4 { font-size: 10px; color: var(--muted); }
+        .doc-body > :first-child { margin-top: 0; }
+        .doc-body p { margin: 0 0 16px; }
+        .doc-body ul, .doc-body ol { margin: 0 0 16px; padding-left: 22px; }
+        .doc-body li { margin-bottom: 6px; }
+        .doc-body li::marker { color: var(--green-dk); }
+        .doc-body strong { color: var(--fg); }
+        .doc-body a { color: var(--yellow); }
+        .doc-body code {
+            font-family: var(--mono);
+            font-size: 0.92em;
+            color: var(--yellow);
+            background: var(--bg);
+            padding: 2px 6px;
+        }
+
+        /* ---- Footer ------------------------------------------------- */
+        .site-foot {
+            margin-top: auto;
+            padding: 28px 48px;
+            border-top: 4px solid var(--blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .foot-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 22px;
+            align-items: center;
+        }
+        .site-foot a { color: var(--yellow); text-decoration: none; }
+        .site-foot a:hover { text-decoration: underline; }
+
+        /* ---- Responsive --------------------------------------------- */
+        @media (max-width: 900px) {
+            .levels { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .site-head { padding: 36px 20px 26px; }
+            .brand span { font-size: 17px; }
+            .site-tagline { font-size: 13px; letter-spacing: 1px; }
+            .site-nav { gap: 16px; font-size: 10px; }
+            .site-main { padding: 30px 20px 40px; }
+            .screen-label { font-size: 13px; }
+            .level { flex-direction: column; gap: 16px; }
+            .level-shot { align-self: flex-start; }
+            .doc-body { padding: 20px 18px; }
+            .site-foot { padding: 22px 20px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; }
+            .btn:hover { transform: none; box-shadow: 4px 4px 0 #000; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-head">
+        <a href="{{ .Site.Home.RelPermalink }}" class="brand">
+            <span>{{ .Site.Params.display_name | default .Site.Title }}</span>
+        </a>
+        <div class="site-tagline">{{ .Site.Params.description }}</div>
+        {{ with .Site.Menus.main }}
+        <nav class="site-nav">
+            {{ range . }}
+            <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>[ {{ upper .Name }} ]</a>
+            {{ end }}
+        </nav>
+        {{ end }}
+    </header>
+
+    <main class="site-main" style="--page-max:{{ .Params.page_max | default (cond .IsHome "1060px" "760px") }}">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-foot">
+        <span>&copy; {{ now.Year }} {{ upper (.Site.Params.display_name | default .Site.Title) }}</span>
+        <nav class="foot-links">
+            <a href="/impressum/">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+            <a href="https://github.com/{{ .Site.Params.github_username }}" target="_blank" rel="noopener">
+                github.com/{{ .Site.Params.github_username }} &#8599;
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>

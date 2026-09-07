@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <a class="back-link" href="{{ .Site.Home.RelPermalink }}">&#9664; ZUR&Uuml;CK</a>
+
+  <h1 class="doc-title">{{ .Title }}</h1>
+
+  {{ with .Params.doc_meta }}<div class="doc-meta">{{ . }}</div>{{ end }}
+
+  <div class="doc-body">
+    {{ .Content }}
+  </div>
+{{ end }}

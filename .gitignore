@@ -1,3 +1,6 @@
 # Hugo build output
 public/
 
+# Hugo build lock and resource cache
+.hugo_build.lock
+resources/

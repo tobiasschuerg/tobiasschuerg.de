@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div class="screen-label">LEVEL SELECT</div>
+
+{{ if eq .Site.Language.Lang "de" }}
+<p class="screen-intro">Eine Sammlung privater Side-Projects.</p>
+{{ else }}
+<p class="screen-intro">A collection of side projects.</p>
+{{ end }}
+
+<div class="levels">
+  {{ range sort (where .Site.RegularPages "Section" "projects") ".Params.weight" }}
+    <div class="level cabinet acc-{{ .Params.accent | default "blue" }}">
+      <div class="level-shot">
+        {{ with .Params.screenshot }}
+          <img src="{{ . | relURL }}" alt="Screenshot: {{ $.Title }}" width="140" height="280" loading="lazy">
+        {{ else }}
+          <div class="shot-empty" aria-hidden="true">Screenshot folgt</div>
+        {{ end }}
+      </div>
+
+      <div class="level-body">
+        <h2 class="level-title">{{ .Title }}</h2>
+
+        {{ with .Params.project_description }}
+          <p class="level-desc">
+            {{ if eq $.Site.Language.Lang "de" }}{{ .de }}{{ else }}{{ .en }}{{ end }}
+          </p>
+        {{ end }}
+
+        {{ with .Params.links }}
+          <div class="level-links">
+            {{ range . }}
+              {{ $label := cond (eq $.Site.Language.Lang "de") .text.de .text.en }}
+              {{ if .primary }}
+                <a class="btn btn-{{ .color | default "green" }}" href="{{ .url }}">&#9654; {{ $label }}</a>
+              {{ else }}
+                <a href="{{ .url }}">{{ $label }}</a>
+              {{ end }}
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+
+  <div class="level-locked">
+    <div class="pixel">&#128274; LEVEL {{ add (len (where .Site.RegularPages "Section" "projects")) 1 }} &mdash; LOCKED</div>
+    <p>{{ if eq .Site.Language.Lang "de" }}N&auml;chstes Projekt in Arbeit &hellip;{{ else }}Next project in progress &hellip;{{ end }}</p>
+  </div>
+</div>
+{{ end }}

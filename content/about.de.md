@@ -1,4 +1,6 @@
 ---
+layout: "ueber"
+page_max: "720px"
 title: "Über"
 ---
 

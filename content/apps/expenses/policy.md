@@ -1,70 +1,129 @@
 ---
-title: "Expenses Deluxe Privacy Policy"
+title: "Expenses Deluxe Datenschutzerklärung"
 url: "/apps/expenses/policy"
 ---
 
-## Privacy Policy
+## Datenschutzerklärung
 
-Tobias Schürg built the Expenses Deluxe app as a Free app. This SERVICE is provided by Tobias Schürg at no cost and is intended for use as is.
+Diese Erklärung beschreibt, welche personenbezogenen Daten die Android-App **Expenses Deluxe** verarbeitet, zu welchem Zweck das geschieht und welche Rechte du dabei hast.
 
-This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+Stand: 7. September 2026
 
-If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+### Verantwortlicher
 
-The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Expenses Deluxe unless otherwise defined in this Privacy Policy.
+Tobias Schürg\
+Bodenseestraße 103\
+88048 Friedrichshafen\
+Deutschland
 
-**Information Collection and Use**
+E-Mail: {{< mail >}}
 
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to name. The information that I request will be retained on your device and is not collected by me in any way.
+Ein Datenschutzbeauftragter ist nicht bestellt; dazu besteht keine gesetzliche Verpflichtung.
 
-The app does use third party services that may collect information used to identify you.
+### Die App braucht ein Konto
 
-Link to privacy policy of third party service providers used by the app
+Anders als manche andere App lässt sich Expenses Deluxe nicht ohne Anmeldung nutzen. Die App teilt Ausgaben zwischen mehreren Personen auf, und dafür müssen die Daten an einer Stelle liegen, auf die alle Beteiligten zugreifen können.
 
-*   [Google Play Services](https://www.google.com/policies/privacy/)
-*   [Firebase Analytics](https://firebase.google.com/policies/analytics)
-*   [Fabric](https://fabric.io/privacy)
-*   [Crashlytics](http://try.crashlytics.com/terms/privacy-policy.pdf)
+Deine Daten liegen deshalb nicht nur auf deinem Gerät, sondern in **Google Cloud Firestore**. Das ist kein Nebeneffekt, sondern die Funktionsweise der App.
 
-**Log Data**
+### Anmeldung
 
-I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol ("IP") address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
+Du meldest dich entweder mit deinem Google-Konto oder mit E-Mail-Adresse und Passwort an. Die Anmeldung läuft über **Firebase Authentication**. Verarbeitet werden dabei deine Konto-Kennung und die hinterlegte E-Mail-Adresse; bei der Anmeldung mit Google zusätzlich die Angaben, die Google für diesen Vorgang bereitstellt.
 
-**Cookies**
+**Zweck** ist es, deine Daten deinem Konto zuzuordnen und die Zusammenarbeit in Gruppen zu ermöglichen.
 
-Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO — die Verarbeitung ist zur Erfüllung des Nutzungsverhältnisses erforderlich, das mit deiner Anmeldung zustande kommt.
 
-This Service does not use these "cookies" explicitly. However, the app may use third party code and libraries that use "cookies" to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+### Ausgaben und Gruppen
 
-**Service Providers**
+In Cloud Firestore werden gespeichert:
 
-I may employ third-party companies and individuals due to the following reasons:
+*   die Ausgaben, die du erfasst — Betrag, Währung, Bezeichnung, Datum und Kategorie,
+*   die Gruppen, in denen du bist, samt Name und Mitgliedern,
+*   die Aufteilung der Ausgaben zwischen den Mitgliedern und der daraus errechnete Ausgleich,
+*   dein in der App hinterlegter Anzeigename.
 
-*   To facilitate our Service;
-*   To provide the Service on our behalf;
-*   To perform Service-related services; or
-*   To assist us in analyzing how our Service is used.
+Diese Daten sind für die anderen Mitglieder der jeweiligen Gruppe sichtbar. Das ist der Zweck einer geteilten Abrechnung — überlege dir also, was du in einer Gruppe erfasst.
 
-I want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+**Zweck** ist die Bereitstellung genau der Funktionen, für die du die App verwendest.
 
-**Security**
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO.
 
-I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security.
+**Speicherdauer:** Die Daten bleiben gespeichert, solange dein Konto besteht. Du kannst die Löschung jederzeit veranlassen, siehe [Konto löschen](/apps/delete). Nach Eingang der Anfrage lösche ich das Konto und die zugehörigen Daten. Ausgaben, die andere Gruppenmitglieder betreffen, können in deren Abrechnung erhalten bleiben, soweit das für die Nachvollziehbarkeit der gemeinsamen Buchhaltung nötig ist.
 
-**Links to Other Sites**
+### Gruppen-Einladungen und Kamera
 
-This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+Einladungen zu einer Gruppe lassen sich als QR-Code weitergeben. Wenn du einen solchen Code scannst, greift die App auf die Kamera zu. Die Auswertung findet **ausschließlich auf deinem Gerät** statt; es werden dabei weder Bilder gespeichert noch an mich oder Dritte übertragen. Die Kameraberechtigung wird nur für diesen Zweck angefragt und lässt sich jederzeit entziehen.
 
-**Children's Privacy**
+### Benachrichtigungen
 
-These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13\. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.
+Damit du mitbekommst, wenn in einer Gruppe etwas passiert, verwendet die App **Firebase Cloud Messaging**. Dafür erzeugt Google eine Geräte-Kennung (Push-Token), die deinem Konto zugeordnet wird. Der Token sagt nichts über dich aus und dient allein der Zustellung.
 
-**Changes to This Privacy Policy**
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Benachrichtigung zur Nutzung in Gruppen gehört. Du kannst die Benachrichtigungsberechtigung jederzeit entziehen.
 
-I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+### Fehlerberichte
 
-**Contact Us**
+Stürzt die App ab oder tritt ein schwerer Fehler auf, wird ein Fehlerbericht über **Firebase Crashlytics** übermittelt. Ein solcher Bericht enthält technische Angaben zum Zeitpunkt des Fehlers: Gerätemodell, Android-Version, App-Version, Zustand der App, Fehlermeldung samt Aufrufliste sowie eine zufällig erzeugte Installations-Kennung. Crashlytics verarbeitet dabei kurzzeitig deine IP-Adresse; sie wird von Google nicht dauerhaft gespeichert.
 
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at tobiasschuerg.de.
+Fehlerberichte enthalten keine Ausgaben und keine Gruppeninhalte.
 
-This privacy policy page was created at [privacypolicytemplate.net](https://privacypolicytemplate.net) and modified/generated by [App Privacy Policy Generator](https://app-privacy-policy-generator.firebaseapp.com/)
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an der Stabilität der App.
+
+**Speicherdauer:** Crashlytics löscht Fehlerberichte automatisch nach 90 Tagen.
+
+### Leistungsmessung
+
+Über **Firebase Performance Monitoring** erhebt die App technische Messwerte zur Ausführungsgeschwindigkeit, etwa Startzeiten und die Dauer von Netzwerkanfragen. Auch hier fallen Gerätetyp, Android- und App-Version sowie eine Installations-Kennung an. Inhalte deiner Abrechnungen sind davon nicht betroffen.
+
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einer funktionierenden App.
+
+### Nutzungsanalyse
+
+Die App verwendet **Firebase Analytics**. Erhoben werden dabei die von Google standardmäßig erfassten Angaben — etwa Gerätetyp, Sprache, ungefähre Region, Sitzungsdauer und eine Installations-Kennung — sowie ein Ereignis beim Start der App.
+
+**Inhalte deiner Abrechnungen werden nicht übermittelt:** weder Beträge noch Bezeichnungen von Ausgaben und auch keine Namen von Gruppen.
+
+Übergeben wird an Analytics allerdings die Push-Kennung deines Geräts (siehe Abschnitt Benachrichtigungen) als sogenannte Nutzereigenschaft. Sie verknüpft die Analysedaten mit deinem Gerät, sagt für sich genommen aber nichts über dich oder deine Ausgaben aus.
+
+Es findet keine Werbung und kein Weiterverkauf dieser Daten statt.
+
+**Zweck** ist zu verstehen, welche Funktionen tatsächlich genutzt werden.
+
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO. Du kannst der Verarbeitung nach Art. 21 DSGVO widersprechen; eine formlose Nachricht an die oben genannte Adresse genügt.
+
+### Wechselkurse
+
+Für Ausgaben in fremder Währung ruft die App aktuelle Wechselkurse bei **Open Exchange Rates** (`openexchangerates.org`) ab. Dabei wird technisch bedingt deine IP-Adresse an diesen Anbieter übermittelt; anders lässt sich ein Abruf im Internet nicht durchführen. Es werden dabei keine Beträge, Bezeichnungen oder Kontodaten übertragen — die Anfrage betrifft nur die Kurse selbst.
+
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO, da die Umrechnung Teil der Funktion ist.
+
+### Empfänger und Übermittlung in die USA
+
+Die genannten Firebase-Dienste — Authentication, Cloud Firestore, Cloud Functions, Cloud Messaging, Crashlytics, Performance Monitoring und Analytics — werden von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, bereitgestellt. Google ist für mich als Auftragsverarbeiter nach Art. 28 DSGVO tätig.
+
+Dabei kann es zu einer Übermittlung von Daten an Google LLC in die USA kommen. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert, sodass ein Angemessenheitsbeschluss der Europäischen Kommission nach Art. 45 DSGVO als Grundlage der Übermittlung besteht. Ergänzend gelten die Standardvertragsklauseln der Kommission nach Art. 46 Abs. 2 lit. c DSGVO.
+
+Darüber hinaus gebe ich deine Daten nicht weiter, verkaufe sie nicht und nutze sie nicht für Werbung.
+
+### Deine Rechte
+
+Du hast das Recht,
+
+*   Auskunft über die zu dir gespeicherten Daten zu verlangen (Art. 15 DSGVO),
+*   unrichtige Daten berichtigen zu lassen (Art. 16 DSGVO),
+*   die Löschung deiner Daten zu verlangen (Art. 17 DSGVO),
+*   die Verarbeitung einschränken zu lassen (Art. 18 DSGVO),
+*   deine Daten in einem gängigen Format zu erhalten oder übertragen zu lassen (Art. 20 DSGVO),
+*   der Verarbeitung auf Grundlage berechtigter Interessen zu widersprechen (Art. 21 DSGVO).
+
+Für all das genügt eine formlose Nachricht an die oben genannte E-Mail-Adresse. Die Löschung deines Kontos kannst du außerdem direkt über das Formular unter [Konto löschen](/apps/delete) anstoßen.
+
+Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO), etwa bei der für meinen Wohnsitz zuständigen Behörde.
+
+### Kinder und Jugendliche
+
+Die App richtet sich nicht gezielt an Kinder. Für die Anmeldung solltest du mindestens 16 Jahre alt sein; jüngere Nutzerinnen und Nutzer benötigen dafür die Zustimmung der Erziehungsberechtigten (Art. 8 DSGVO).
+
+### Änderungen
+
+Ändert sich die App, passe ich diese Erklärung an. Es gilt jeweils die hier veröffentlichte Fassung; das Datum oben zeigt den letzten Stand.
