@@ -5,12 +5,18 @@ Personal website built with Hugo.
 ## Development
 
 ### Prerequisites
-- [Hugo](https://gohugo.io/installation/) v0.148.1 or later
+- [Hugo](https://gohugo.io/installation/) v0.165.0 or later
 
   Match the version pinned as `HUGO_VERSION` in
   `.github/workflows/hugo.yml`. Older releases will not build this site:
   it uses the flat `layouts/` scheme and the `build` front matter key
-  (Hugo 0.146+) and `languages.en.disabled` in `hugo.toml`.
+  (Hugo 0.146+), `languages.en.disabled`, and the `locale` / `label`
+  language keys with `.Site.Language.Locale`, which replaced
+  `languageCode` / `languageName` / `.Site.LanguageCode` in Hugo 0.158.
+
+  On an older Hugo the build fails outright with
+  `can't evaluate field Locale in type *langs.Language` — it does not
+  degrade quietly.
 
 ### Local Development
 

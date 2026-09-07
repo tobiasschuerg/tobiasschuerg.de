@@ -8,6 +8,9 @@ title = 'tobiasschuerg.de'
 # deploy workflow checks out with fetch-depth: 0.
 enableGitInfo = true
 
+# Renders layouts/robots.txt, which points crawlers at the sitemap.
+enableRobotsTXT = true
+
 # Disable unused features
 disableKinds = ["taxonomy", "term", "RSS"]
 
@@ -18,8 +21,8 @@ disableKinds = ["taxonomy", "term", "RSS"]
 
 [languages]
   [languages.de]
-    languageCode = 'de-DE'
-    languageName = 'Deutsch'
+    locale = 'de-DE'
+    label = 'Deutsch'
     title = 'tobiasschuerg.de'
     weight = 1
     [languages.de.params]
@@ -44,8 +47,8 @@ disableKinds = ["taxonomy", "term", "RSS"]
   #     the menu/card URLs to be language-aware (relLangURL)
   [languages.en]
     disabled = true
-    languageCode = 'en-US'
-    languageName = 'English'
+    locale = 'en-US'
+    label = 'English'
     title = 'tobiasschuerg.de'
     weight = 2
     [languages.en.params]

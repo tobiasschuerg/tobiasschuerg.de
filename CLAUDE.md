@@ -41,7 +41,14 @@ grep -rhoE '(src|srcset)=["'"'"']?https?://' public --include="*.html"
 ```
 
 Keep the local Hugo version matching `HUGO_VERSION` in
-`.github/workflows/hugo.yml` (currently 0.148.1).
+`.github/workflows/hugo.yml` (currently 0.165.0). The floor is 0.158: the
+language config uses `locale` / `label` and the templates use
+`.Site.Language.Locale`, which replaced `languageCode` / `languageName` /
+`.Site.LanguageCode`. An older binary fails the build with
+`can't evaluate field Locale in type *langs.Language`.
+
+A version bump is verified by building with both binaries and diffing the
+output — anything beyond the `<meta name=generator>` string is a real change.
 
 Regenerating the icon and the share card needs Python with Pillow:
 
@@ -211,6 +218,39 @@ JetBrains Mono is the variable file — one download covers weights 400–700.
 Both faces are SIL OFL 1.1 and the licence must stay at
 `static/fonts/LICENSE.txt`.
 
+### The CSP is a privacy guard, not XSS hardening
+
+`layouts/baseof.html` emits a `<meta http-equiv="Content-Security-Policy">`
+whose real job is to make the promise in `/datenschutz/` enforceable: a Google
+Font or an analytics snippet added later fails visibly instead of silently
+contradicting the privacy policy.
+
+Do not oversell it. The inline `<style>` block and the terminal's inline
+`<script>` both need `'unsafe-inline'`, so it buys little against XSS. A
+`<meta>` CSP also cannot carry `frame-ancestors` or `report-uri`; those need
+real headers, which GitHub Pages cannot set.
+
+It is wrapped in `{{ if hugo.IsProduction }}` **on purpose** — `connect-src
+'none'` would kill the LiveReload websocket that `hugo server` injects. So it
+is absent from the dev server and present in `hugo --gc --minify`. Verify it
+by serving `public/` statically and watching the console, not via
+`hugo server`.
+
+### Headings and the pixel font
+
+Every page has exactly one `<h1>`; on the home, Über and 404 screens it is the
+`.screen-label` ("LEVEL SELECT", "CREDITS", "GAME OVER").
+
+`.screen-label` sets `font-weight: 400` and that is load-bearing. Press Start
+2P ships a single weight, so a heading inheriting the UA's `bold` makes the
+browser synthesise one and smear the pixel grid.
+
+Note that `.doc-title`, `.level-title` and `.doc-body h2/h3/h4` are all
+headings in the pixel face **without** that reset, so they are being
+synthetically emboldened today. That is pre-existing and consistent; fixing it
+would change how those headings look, so it is a deliberate decision, not a
+cleanup.
+
 ### URLs under /apps/ are load-bearing
 
 Each `content/apps/<app>/{policy,terms}.md` pins its own URL via explicit
@@ -246,7 +286,8 @@ history recall.
 
 ## Legal pages
 
-`/impressum/` and `/datenschutz/` are linked from the footer.
+`layouts/robots.txt` (enabled by `enableRobotsTXT`) points crawlers at the
+sitemap. `/impressum/` and `/datenschutz/` are linked from the footer.
 `/datenschutz/` describes the *website*; the per-app policies under `/apps/`
 are separate documents. If the site starts loading anything external, or sets
 storage, `/datenschutz/` has to change with it.
@@ -257,7 +298,12 @@ pages come from git*.
 ## Deployment
 
 Push to `master` triggers `.github/workflows/hugo.yml`, which builds and
-deploys `./public` to GitHub Pages.
+deploys `./public` to GitHub Pages. The same workflow runs on `pull_request`
+as a build-only check: `Setup Pages`, `Upload artifact` and the whole `deploy`
+job are gated on `github.event_name != 'pull_request'`, so a PR can never
+deploy. With `Setup Pages` skipped, `BASE_URL` is empty and
+`${BASE_URL:+--baseURL "$BASE_URL/"}` expands to nothing, leaving the baseURL
+from `hugo.toml`.
 
 Three consequences worth knowing:
 
