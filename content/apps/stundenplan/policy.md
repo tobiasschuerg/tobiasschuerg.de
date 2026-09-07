@@ -1,5 +1,6 @@
 ---
 title: "Stundenplan Deluxe Datenschutzerklärung"
+description: "Welche personenbezogenen Daten die Android-App Stundenplan Deluxe verarbeitet, wozu, und welche Rechte du dabei hast."
 url: "/apps/stundenplan/policy"
 ---
 
@@ -8,8 +9,6 @@ url: "/apps/stundenplan/policy"
 Diese Erklärung beschreibt, welche personenbezogenen Daten die Android-App **Stundenplan Deluxe** verarbeitet, zu welchem Zweck das geschieht und welche Rechte du dabei hast.
 
 Sie gilt für beide Ausgaben der App: die kostenlose Version und **Stundenplan Deluxe Plus**. Der einzige datenschutzrelevante Unterschied ist die Werbung — sie kommt nur in der kostenlosen Version vor und ist unten eigens beschrieben.
-
-Stand: 7. September 2026
 
 ### Verantwortlicher
 

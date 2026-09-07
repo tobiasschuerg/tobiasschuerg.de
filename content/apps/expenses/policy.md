@@ -1,13 +1,12 @@
 ---
 title: "Expenses Deluxe Datenschutzerklärung"
+description: "Welche personenbezogenen Daten die Android-App Expenses Deluxe verarbeitet, wozu, und welche Rechte du dabei hast."
 url: "/apps/expenses/policy"
 ---
 
 ## Datenschutzerklärung
 
 Diese Erklärung beschreibt, welche personenbezogenen Daten die Android-App **Expenses Deluxe** verarbeitet, zu welchem Zweck das geschieht und welche Rechte du dabei hast.
-
-Stand: 7. September 2026
 
 ### Verantwortlicher
 

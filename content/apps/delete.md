@@ -1,6 +1,8 @@
 ---
 title: "Account Deletion"
+description: "How to request deletion of your account and all data associated with it."
 url: "/apps/delete"
+hide_lastmod: true
 ---
 
 ## Request Account Deletion

@@ -3,6 +3,11 @@ defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = false
 title = 'tobiasschuerg.de'
 
+# Dates the legal pages from the last commit that touched them, via the
+# default `lastmod = [':git', ...]` chain. Needs full git history, so the
+# deploy workflow checks out with fetch-depth: 0.
+enableGitInfo = true
+
 # Disable unused features
 disableKinds = ["taxonomy", "term", "RSS"]
 

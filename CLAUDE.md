@@ -9,6 +9,10 @@ Node/Go dependencies, no build pipeline beyond Hugo itself. There is no test
 suite and no linter — verification means building the site and inspecting the
 output.
 
+The one thing outside Hugo is `tools/gen_brand_assets.py`, which draws the
+favicon and the Open Graph card. It is run by hand, its outputs are committed,
+and CI never touches it — see *Brand assets come from one pixel grid*.
+
 The design is an 8-bit arcade treatment: Sweetie-16 palette on `#1a1c2c`,
 Press Start 2P for display type and JetBrains Mono for body, project cards as
 "cabinets" on a LEVEL SELECT screen.
@@ -29,11 +33,21 @@ Useful checks after a build:
 ```bash
 find public -name "*.html" | sort                      # what actually rendered
 grep -o 'class="level cabinet' public/index.html | wc -l   # project cards (expect 6)
-grep -rhoE 'https?://[a-z0-9.-]+' public --include="*.html" | sort -u
+grep -o '<lastmod>' public/sitemap.xml | wc -l         # must equal the <loc> count
+
+# Every remote subresource — must print nothing. Bare URL greps no longer
+# work: rel=canonical and og:image are absolute URLs to our own origin.
+grep -rhoE '(src|srcset)=["'"'"']?https?://' public --include="*.html"
 ```
 
 Keep the local Hugo version matching `HUGO_VERSION` in
 `.github/workflows/hugo.yml` (currently 0.148.1).
+
+Regenerating the icon and the share card needs Python with Pillow:
+
+```bash
+python tools/gen_brand_assets.py       # rewrites the four files in static/
+```
 
 ## Architecture
 
@@ -75,6 +89,70 @@ and warns on every build.
 Each card has a 140×280 slot. When `screenshot` is absent the card renders a
 hatched "Screenshot folgt" placeholder. The repo ships no images. Do not
 invent or substitute screenshots; add the file and set the front matter key.
+
+### Brand assets come from one pixel grid
+
+`tools/gen_brand_assets.py` draws all four of these from the single 16×16
+`MARK` grid, so the icon is the same shape everywhere:
+
+| File | Notes |
+|---|---|
+| `static/favicon.svg` | one `<rect>` per horizontal run, `shape-rendering: crispEdges` |
+| `static/favicon.ico` | 16/32/48, each an independent nearest-neighbour render |
+| `static/apple-touch-icon.png` | 180×180 (11× the grid, padded — keeps pixels square) |
+| `static/og-image.png` | 1200×630 share card |
+
+The mark is a pizza slice, pointing at the dough calculator. It was picked
+over an arcade cabinet because **a favicon has to survive 16px** — the cabinet
+was legible at 48px and mush in a tab. Judge any replacement at 16px, not
+zoomed in.
+
+Edit `MARK` and re-run; do not hand-edit the outputs. The ICO is assembled
+byte by byte on purpose: letting Pillow resample one bitmap down to 16px
+blurs a pixel-art mark.
+
+The OG card is typeset in `static/fonts/*.woff2` — FreeType reads WOFF2
+directly, so the card uses the same faces as the page. That makes the font
+files a dependency of the generator as well as of the site.
+
+The script is **not** part of the build. Its outputs are committed, Hugo just
+copies them out of `static/`, and CI never installs Pillow.
+
+### Head metadata is per-page
+
+`layouts/baseof.html` computes `$title` and `$desc` once at the top of
+`<head>` and reuses them for `<title>`, `<meta name=description>`, `og:title`
+and `og:description`.
+
+`$desc` is `.Description | default .Site.Params.description`, so **give every
+new content file a `description` in its front matter**. The site tagline is
+only a fallback; when it wins, that page ships the same meta description as
+every other page, which is what this replaced.
+
+Open Graph and `twitter:card` are written out by hand rather than via
+`_internal/opengraph.html`: one image for the whole site, no article
+metadata, nothing to configure.
+
+### Dates on the legal pages come from git
+
+`enableGitInfo = true` in `hugo.toml` makes `.Lastmod` the date of the last
+commit that touched the file, through Hugo's default
+`lastmod = [":git", "lastmod", "date", "publishDate"]` chain. `layouts/page.html`
+renders it as `Stand: <time datetime="…">`.
+
+Two consequences:
+
+- The policies no longer carry a hand-written `Stand:` line in the markdown.
+  Do not add one back — it would drift away from the real last edit, which is
+  exactly the failure this removed.
+- **Any commit touching a policy re-dates it.** A typo fix moves the date on a
+  legal document. That is the intended trade, but it is a trade.
+
+`hide_lastmod: true` opts a page out; `content/apps/delete.md` uses it because
+it is an English stub, not a dated German legal document.
+
+This is also what puts `<lastmod>` in `sitemap.xml`, and it is why the deploy
+workflow needs a full clone — see *Deployment*.
 
 ### `[hidden]` needs the `!important` reset
 
@@ -123,9 +201,11 @@ underlines; the button rules are now scoped as `.level-links a.btn`.
 found an actionable DSGVO violation (3 O 17493/20), and `/datenschutz/`
 currently states that no third-party requests happen.
 
-The built site should make **zero external resource requests**; every
-remaining `https://` URL in the output is an `<a href>`. The grep above
-verifies this.
+The built site should make **zero external resource requests**. Absolute
+`https://` URLs do now appear in the output — `rel=canonical` and `og:image`
+point at our own origin — so the test is no longer "are there any URLs" but
+"is anything *loaded* from elsewhere". The `src|srcset` grep under *Commands*
+is the one that still means something; everything remote must be an `<a href>`.
 
 JetBrains Mono is the variable file — one download covers weights 400–700.
 Both faces are SIL OFL 1.1 and the licence must stay at
@@ -171,12 +251,15 @@ history recall.
 are separate documents. If the site starts loading anything external, or sets
 storage, `/datenschutz/` has to change with it.
 
+Their `Stand:` dates are generated, not written — see *Dates on the legal
+pages come from git*.
+
 ## Deployment
 
 Push to `master` triggers `.github/workflows/hugo.yml`, which builds and
 deploys `./public` to GitHub Pages.
 
-Two consequences worth knowing:
+Three consequences worth knowing:
 
 - The workflow passes `--baseURL "${{ steps.pages.outputs.base_url }}/"`, which
   **overrides** the `baseURL` in `hugo.toml`. That value comes from the custom
@@ -184,3 +267,8 @@ Two consequences worth knowing:
 - Only the contents of `public/` are deployed, and Hugo only copies files from
   `static/`. That is why `CNAME` lives at `static/CNAME` — at the repo root it
   would never reach the artifact.
+- `actions/checkout` runs with **`fetch-depth: 0`, and that is load-bearing.**
+  `enableGitInfo` reads each file's last commit; the default shallow clone has
+  only one commit, so every page would silently be stamped with the same date.
+  The build still succeeds and warns about nothing. If the `Stand:` dates ever
+  come out identical across all policies, check this first.

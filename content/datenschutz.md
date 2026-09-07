@@ -1,5 +1,6 @@
 ---
 title: "Datenschutzerklärung"
+description: "Datenschutzerklärung der Website tobiasschuerg.de: keine Cookies, kein Tracking, keine Inhalte von fremden Servern."
 layout: "page"
 url: "/datenschutz/"
 doc_meta: "Diese Seite betrifft die Website. Für die Apps gelten eigene Erklärungen."

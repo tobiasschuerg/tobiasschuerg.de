@@ -1,13 +1,12 @@
 ---
 title: "Stundenplan Deluxe Nutzungsbedingungen"
+description: "Nutzungsbedingungen für die Android-App Stundenplan Deluxe."
 url: "/apps/stundenplan/terms"
 ---
 
 ## Nutzungsbedingungen
 
 Diese Bedingungen regeln die Nutzung der Android-App **Stundenplan Deluxe** und der kostenpflichtigen Ausgabe **Stundenplan Deluxe Plus**. Mit dem Herunterladen und Verwenden der App stimmst du ihnen zu.
-
-Stand: 7. September 2026
 
 ### Anbieter
 

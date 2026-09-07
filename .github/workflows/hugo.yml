@@ -34,6 +34,10 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # enableGitInfo dates each page from its last commit,
+          # which a shallow clone does not carry.
+          fetch-depth: 0
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ .Site.Params.description }}">
+    {{- $title := cond .IsHome .Site.Title (printf "%s - %s" .Title .Site.Title) }}
+    {{- /* Per-page `description` front matter; the site tagline is only the
+           fallback, so pages don't all share one meta description. */}}
+    {{- $desc := .Description | default .Site.Params.description }}
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $desc }}">
     <meta name="theme-color" content="#1a1c2c">
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    {{- /* Hand-rolled instead of _internal/opengraph.html: one image for the
+           whole site, no article metadata, nothing to configure. */}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:locale" content="{{ replace .Site.LanguageCode "-" "_" }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $desc }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ "og-image.png" | absURL }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pixel-Pizzastück, darunter {{ .Site.Params.display_name }} und {{ .Site.Title }}">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>

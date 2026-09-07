@@ -1,13 +1,12 @@
 ---
 title: "Tatort Logbuch Nutzungsbedingungen"
+description: "Nutzungsbedingungen für die Android-App Tatort Logbuch."
 url: "/apps/tatort/terms"
 ---
 
 ## Nutzungsbedingungen
 
 Diese Bedingungen regeln die Nutzung der Android-App **Tatort Logbuch**. Mit dem Herunterladen und Verwenden der App stimmst du ihnen zu.
-
-Stand: 7. September 2026
 
 ### Anbieter
 
