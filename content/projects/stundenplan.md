@@ -12,6 +12,11 @@ links:
       en: "Play Store"
     primary: true
     color: "green"
+  - url: "https://stundenplan-deluxe.de"
+    text:
+      de: "Webseite"
+      en: "Website"
+    primary: false
   - url: "/apps/stundenplan/policy/"
     text:
       de: "Datenschutz"
