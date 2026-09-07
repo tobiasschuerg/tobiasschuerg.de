@@ -56,6 +56,16 @@ The only requirement is Python with [Pillow](https://pypi.org/project/pillow/).
 This is deliberately *not* part of the build: the outputs are committed, Hugo
 just copies them out of `static/`, and CI never installs anything for it.
 
+## Tests
+
+```bash
+node tools/term_test.mjs
+```
+
+Smoke test for the Über terminal's command dispatcher. Node only, no
+dependencies, no build step — it runs against `assets/js/terminal.js`
+directly. It is the repo's only automated test and is not wired into CI.
+
 ## Content notes
 
 - Give every new page a `description` in its front matter. Without one it

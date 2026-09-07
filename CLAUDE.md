@@ -9,9 +9,14 @@ Node/Go dependencies, no build pipeline beyond Hugo itself. There is no test
 suite and no linter — verification means building the site and inspecting the
 output.
 
-The one thing outside Hugo is `tools/gen_brand_assets.py`, which draws the
-favicon and the Open Graph card. It is run by hand, its outputs are committed,
-and CI never touches it — see *Brand assets come from one pixel grid*.
+Two things sit outside that. `tools/gen_brand_assets.py` draws the favicon and
+the Open Graph card; it is run by hand, its outputs are committed, and CI never
+touches it. `tools/term_test.mjs` is the one automated test, for the Über
+terminal, and needs only Node.
+
+Hugo's own asset pipeline is used in exactly one place: `assets/js/terminal.js`
+is minified and fingerprinted into the build. Everything else — all CSS
+included — is still inline in the templates.
 
 The design is an 8-bit arcade treatment: Sweetie-16 palette on `#1a1c2c`,
 Press Start 2P for display type and JetBrains Mono for body, project cards as
@@ -50,11 +55,12 @@ language config uses `locale` / `label` and the templates use
 A version bump is verified by building with both binaries and diffing the
 output — anything beyond the `<meta name=generator>` string is a real change.
 
-Regenerating the icon and the share card needs Python with Pillow:
-
 ```bash
-python tools/gen_brand_assets.py       # rewrites the four files in static/
+node tools/term_test.mjs               # the terminal dispatcher (Node only)
+python tools/gen_brand_assets.py       # rewrites the four icon files in static/
 ```
+
+The second needs Python with Pillow; the first needs nothing.
 
 ## Architecture
 
@@ -177,23 +183,46 @@ permanently on page load. This shipped broken once. Any new overlay that sets
 
 ### The Über terminal
 
-`layouts/ueber.html` is a self-contained interactive terminal, reached because
-`content/about.de.md` sets `layout: "ueber"`. It holds its own markup, styles
-and vanilla JS.
+`layouts/ueber.html` holds the markup and styles; the behaviour lives in
+`assets/js/terminal.js`. The page is reached because `content/about.de.md` sets
+`layout: "ueber"`.
 
 - `run(cmd)` is the dispatcher; it returns `[output, kind]` where kind is
   `res`, `err` or `art`, or the sentinels `__panic__` / `__clear__`.
-- `ls`, `open` and `top` read a real project list serialised from Hugo via
-  `{{ $items }}`. html/template converts the Go slice to a JS array literal in
-  script context — do not wrap it in `jsonify`.
 - Typed input is rendered with `textContent`, never `innerHTML`.
 - Arrow up/down walk history; `rm -rf` opens the kernel panic; `claude` fires a
   canvas fireworks overlay.
 
+**The JS is an external file on purpose.** It is loaded as
+
+```go-html-template
+{{ $js := resources.Get "js/terminal.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+```
+
+which is what allows `script-src 'self'` with no `'unsafe-inline'`. **Do not
+move it back inline, and do not add an inline `<script>` to any layout** — the
+CSP would block it, and loosening the CSP to accommodate it gives up the only
+part of that policy with real teeth.
+
+Hugo data reaches it as JSON in a data attribute, not as template syntax inside
+the script:
+
+```go-html-template
+<div id="term-data" hidden data-terminal="{{ dict "projects" $items ... | jsonify }}"></div>
+```
+
+`ls`, `open` and `top` read that list, so they stay true to the real projects.
+A `<div>` attribute rather than a `<script type="application/json">` island
+keeps this out of Go's script-context escaping entirely; `jsonify` **is**
+correct here, unlike in the old inline form.
+
 ### Styling lives in one file
 
 All global CSS is a single inline `<style>` block in `layouts/baseof.html` —
-no `assets/` pipeline, no SCSS, no external stylesheet. Page-specific styles
+no SCSS, no external stylesheet. (`assets/` exists, but only for
+`js/terminal.js`; no CSS goes through it.) This is why `style-src` still needs
+`'unsafe-inline'` while `script-src` does not. Page-specific styles
 sit in their own `<style>` block inside the relevant layout.
 
 Watch selector specificity when adding to `layouts/`. `.level-links a` (0,1,1)
@@ -271,18 +300,24 @@ language-aware, so they would also need `relLangURL`.
 
 ## Testing the terminal JS
 
-There is no test runner, but Node is available and the dispatcher can be
-driven directly:
+```bash
+node tools/term_test.mjs
+```
 
-1. Build **unminified** to a temp directory: `hugo --quiet --destination <tmp>`.
-   The minifier renames `run`, so testing the minified output fails.
-2. Extract the last `<script>` block from `<tmp>/about/index.html`.
-3. Append `globalThis.__run = run;` before the closing `}())`.
-4. Stub `document`, `window.matchMedia`, `requestAnimationFrame`, and a canvas
-   `getContext` returning no-ops; then call `__run('help')` and friends.
+Node only, no dependencies, no Hugo build. It reads `assets/js/terminal.js`
+straight from source, stubs `document`, `window` and a canvas `getContext`, and
+drives `run()` through `help`, `ls`, `open`, `top`, the error path and both
+sentinels.
 
-Capturing the input element's `keydown` handler this way also exercises the
-history recall.
+Two things it relies on:
+
+- The source is an IIFE that exports nothing, so the test injects
+  `globalThis.__run = run;` before the closing `}())`.
+- It must run against `assets/`, never the built output — Hugo's minifier
+  renames `run`.
+
+This is the repo's only automated test. It is not wired into CI; run it after
+touching the terminal.
 
 ## Legal pages
 
