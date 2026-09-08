@@ -29,7 +29,7 @@ Erst wenn du dich freiwillig anmeldest, verlassen Daten dein Gerät. Was dann pa
 
 Meldest du dich mit deinem Google-Konto an, kannst du deine Daten zwischen mehreren Geräten synchronisieren. Dabei werden verarbeitet:
 
-*   deine Google-Konto-Kennung und die hinterlegte E-Mail-Adresse (über Firebase Authentication),
+*   deine Google-Konto-Kennung, der dort hinterlegte Anzeigename und die E-Mail-Adresse (über Firebase Authentication),
 *   die Folgen, die du als gesehen markiert hast, jeweils mit Datum,
 *   die Folgen, die du als Favorit gespeichert hast,
 *   die Bewertungen, die du vergeben hast.
@@ -40,17 +40,15 @@ Diese Daten werden bei Google Cloud Firestore gespeichert und sind dort deinem K
 
 **Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO — die Verarbeitung ist zur Erfüllung des Nutzungsverhältnisses erforderlich, das mit deiner Anmeldung zustande kommt.
 
-**Speicherdauer:** Die Daten bleiben gespeichert, solange dein Konto besteht. Du kannst die Löschung jederzeit veranlassen, siehe [Konto löschen](/apps/delete). Nach Eingang der Anfrage lösche ich das Konto und alle zugehörigen Daten.
+**Speicherdauer:** Die Daten bleiben gespeichert, solange dein Konto besteht. Du kannst dein Konto jederzeit direkt in der App löschen (Einstellungen → Konto löschen); dabei werden das Konto und alle zugehörigen Daten sofort entfernt. Alternativ kannst du die Löschung über [Konto löschen](/apps/delete) anstoßen; nach Eingang der Anfrage lösche ich das Konto und alle zugehörigen Daten.
 
 ### Fehlerberichte
 
 Stürzt die App ab oder tritt ein schwerer Fehler auf, wird ein Fehlerbericht über **Firebase Crashlytics** übermittelt. Ein solcher Bericht enthält technische Angaben zum Zeitpunkt des Fehlers: Gerätemodell, Android-Version, App-Version, Zustand der App, Fehlermeldung samt Aufrufliste sowie eine zufällig erzeugte Installations-Kennung. Crashlytics verarbeitet dabei kurzzeitig deine IP-Adresse; sie wird von Google nicht dauerhaft gespeichert.
 
-Fehlerberichte enthalten keine Angaben darüber, welche Folgen du dir ansiehst, und keine Inhalte deines Logbuchs.
-
 **Zweck** ist das Erkennen und Beheben von Fehlern.
 
-**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt darin, die Stabilität der App sicherzustellen. Da die Berichte rein technisch sind und keine Rückschlüsse auf dein Nutzungsverhalten zulassen, überwiegen deine Interessen hier nicht.
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt darin, die Stabilität der App sicherzustellen.
 
 **Speicherdauer:** Crashlytics löscht Fehlerberichte automatisch nach 90 Tagen.
 
@@ -68,7 +66,7 @@ Auf Wunsch erinnert dich die App am Tag der Ausstrahlung an eine neue Folge. Die
 
 ### Abruf von Inhalten
 
-Die App lädt Folgendaten und Bilder von externen Servern. Dabei wird technisch bedingt deine IP-Adresse an den jeweiligen Anbieter übermittelt; anders lässt sich ein Abruf im Internet nicht durchführen. Betroffen sind die Server, auf denen die Folgendaten bereitgestellt werden, sowie die ARD Mediathek (`api.ardmediathek.de`), sofern Bildmaterial zu einer Folge angezeigt wird.
+Die App lädt Folgendaten und Bilder von externen Servern. Dabei wird technisch bedingt deine IP-Adresse an den jeweiligen Anbieter übermittelt; anders lässt sich ein Abruf im Internet nicht durchführen. Betroffen sind Cloud Storage for Firebase, von wo die App die Folgendaten lädt, sowie die ARD Mediathek (`api.ardmediathek.de`), sofern Bildmaterial zu einer Folge angezeigt wird.
 
 Öffnest du aus der App heraus einen Link — etwa zur ARD Mediathek, zur Wikipedia oder zu IMDb — verlässt du den Bereich dieser Erklärung. Für die Datenverarbeitung auf den verlinkten Seiten sind deren Betreiber verantwortlich.
 
@@ -78,7 +76,7 @@ Die App kann dich gelegentlich fragen, ob du sie im Play Store bewerten möchtes
 
 ### Empfänger und Übermittlung in die USA
 
-Die genannten Dienste — Firebase Authentication, Cloud Firestore, Firebase Crashlytics, Firebase App Check und Google Play — werden von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, bereitgestellt. Google ist für mich als Auftragsverarbeiter nach Art. 28 DSGVO tätig.
+Die genannten Dienste — Firebase Authentication, Cloud Firestore, Cloud Storage for Firebase, Firebase Crashlytics, Firebase App Check und Google Play — werden von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, bereitgestellt. Google ist für mich als Auftragsverarbeiter nach Art. 28 DSGVO tätig.
 
 Dabei kann es zu einer Übermittlung von Daten an Google LLC in die USA kommen. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert, sodass ein Angemessenheitsbeschluss der Europäischen Kommission nach Art. 45 DSGVO als Grundlage der Übermittlung besteht. Ergänzend gelten die Standardvertragsklauseln der Kommission nach Art. 46 Abs. 2 lit. c DSGVO.
 
@@ -95,7 +93,7 @@ Du hast das Recht,
 *   deine Daten in einem gängigen Format zu erhalten oder übertragen zu lassen (Art. 20 DSGVO),
 *   der Verarbeitung auf Grundlage berechtigter Interessen zu widersprechen (Art. 21 DSGVO).
 
-Für all das genügt eine formlose Nachricht an die oben genannte E-Mail-Adresse. Die Löschung deines Kontos kannst du außerdem direkt über das Formular unter [Konto löschen](/apps/delete) anstoßen.
+Für all das genügt eine formlose Nachricht an die oben genannte E-Mail-Adresse. Dein Konto kannst du außerdem direkt in der App löschen (Einstellungen → Konto löschen) oder die Löschung über das Formular unter [Konto löschen](/apps/delete) anstoßen.
 
 Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO), etwa bei der für meinen Wohnsitz zuständigen Behörde.
 
