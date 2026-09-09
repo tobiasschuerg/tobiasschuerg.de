@@ -37,7 +37,7 @@ Meldest du dich an, werden die oben genannten Stundenplandaten auf meinen Server
 
 **Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO — die Verarbeitung ist zur Erfüllung des Nutzungsverhältnisses erforderlich, das mit deiner Anmeldung zustande kommt.
 
-**Speicherdauer:** Die Daten bleiben gespeichert, solange dein Konto besteht. Du kannst die Löschung jederzeit veranlassen, siehe [Konto löschen](/apps/delete).
+**Speicherdauer:** Die Daten bleiben gespeichert, solange dein Konto besteht. Du kannst dein Konto jederzeit selbst löschen: in der App unter **Mehr → Profil → Konto löschen** oder über das Formular unter [Konto löschen](/apps/delete).
 
 ### Suche nach deiner Schule
 
@@ -117,7 +117,7 @@ Du hast das Recht,
 *   der Verarbeitung auf Grundlage berechtigter Interessen zu widersprechen (Art. 21 DSGVO),
 *   eine erteilte Einwilligung jederzeit zu widerrufen (Art. 7 Abs. 3 DSGVO).
 
-Für all das genügt eine formlose Nachricht an die oben genannte E-Mail-Adresse. Die Löschung deines Kontos kannst du außerdem direkt über das Formular unter [Konto löschen](/apps/delete) anstoßen.
+Für all das genügt eine formlose Nachricht an die oben genannte E-Mail-Adresse. Die Löschung deines Kontos kannst du außerdem selbst auslösen: direkt in der App unter **Mehr → Profil → Konto löschen** oder über das Formular unter [Konto löschen](/apps/delete).
 
 Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO), etwa bei der für meinen Wohnsitz zuständigen Behörde.
 
