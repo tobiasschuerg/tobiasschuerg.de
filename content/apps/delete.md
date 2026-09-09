@@ -44,9 +44,18 @@ Ein Konto entsteht erst, wenn du dir eines anlegst, um deinen Stundenplan
 zwischen Geräten zu synchronisieren. Ohne Konto bleiben deine Daten auf dem
 Gerät und verschwinden mit der Deinstallation.
 
-**Über das Formular:** [Löschung beantragen][formular]
+**Direkt in der App:**
 
-Einen Weg direkt in der App gibt es hier noch nicht.
+1.  Unten in der Navigationsleiste **Mehr** öffnen und oben auf dein Konto
+    tippen, um das **Profil** zu öffnen.
+2.  Unter **Kontoaktionen** den Eintrag **Konto löschen** wählen. Der Eintrag
+    erscheint nur, wenn du angemeldet bist.
+3.  Im Dialog **LÖSCHEN** eintippen und mit **Konto löschen** bestätigen.
+
+Konto und zugehörige Daten werden sofort entfernt; du wirst anschließend
+abgemeldet.
+
+**Alternativ über das Formular:** [Löschung beantragen][formular]
 
 **Gelöscht werden** deine E-Mail-Adresse samt Anmeldedaten und die auf den
 Server übertragenen Stundenplandaten: Fächer, Unterrichtsstunden, Räume,
