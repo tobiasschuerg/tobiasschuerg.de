@@ -25,9 +25,9 @@ Die App ist ein privat entwickeltes Hilfsmittel. Sie steht in **keiner Verbindun
 
 ### Kostenlose Version und Plus
 
-Die Grundversion ist kostenlos und wird durch Werbung finanziert. Einzelne Funktionen sind in ihr eingeschränkt.
+Die Grundversion ist kostenlos; einzelne Funktionen sind in ihr eingeschränkt.
 
-**Stundenplan Deluxe Plus** entfernt die Werbung und hebt diese Einschränkungen auf. Der Kauf läuft über Google Play; es gelten zusätzlich die dortigen Bedingungen. Für Widerruf, Erstattung und Kündigung eines Abonnements ist Google Play zuständig; laufende Abonnements verwaltest du in deinem Google-Konto.
+**Stundenplan Deluxe Plus** hebt diese Einschränkungen auf. Der Kauf läuft über Google Play; es gelten zusätzlich die dortigen Bedingungen. Für Widerruf, Erstattung und Kündigung eines Abonnements ist Google Play zuständig; laufende Abonnements verwaltest du in deinem Google-Konto.
 
 Die Kosten deiner Internetverbindung trägst du in beiden Fällen selbst.
 
@@ -46,8 +46,6 @@ Sichere dir wichtige Daten trotzdem zusätzlich. Ein Gerätewechsel, ein Defekt 
 ### Nutzung
 
 Du darfst die App für private Zwecke nutzen. Nicht gestattet ist es, die App oder Teile davon zu kopieren, zu verändern, zurückzuentwickeln, daraus abgeleitete Versionen zu erstellen oder Marken und Kennzeichen zu verwenden. Alle Rechte an der App verbleiben bei mir.
-
-Ebenfalls nicht gestattet ist es, die Werbeeinblendungen der kostenlosen Version zu umgehen oder zu manipulieren.
 
 ### Verfügbarkeit und Änderungen
 

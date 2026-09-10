@@ -8,7 +8,7 @@ url: "/apps/stundenplan/policy"
 
 Diese Erklärung beschreibt, welche personenbezogenen Daten die Android-App **Stundenplan Deluxe** verarbeitet, zu welchem Zweck das geschieht und welche Rechte du dabei hast.
 
-Sie gilt für beide Ausgaben der App: die kostenlose Version und **Stundenplan Deluxe Plus**. Der einzige datenschutzrelevante Unterschied ist die Werbung — sie kommt nur in der kostenlosen Version vor und ist unten eigens beschrieben.
+Sie gilt für beide Ausgaben der App: die kostenlose Version und **Stundenplan Deluxe Plus**. Datenschutzrechtlich behandelt sie beide gleich.
 
 ### Verantwortlicher
 
@@ -55,24 +55,6 @@ Auf Wunsch überträgt die App Prüfungstermine in deinen Gerätekalender. Der Z
 
 Die App erinnert dich auf Wunsch an Unterricht, Prüfungen und Aufgaben. Diese Erinnerungen werden ausschließlich auf deinem Gerät geplant und ausgelöst; dafür werden keine Daten an mich übermittelt. Du kannst die Benachrichtigungsberechtigung jederzeit entziehen.
 
-### Werbung in der kostenlosen Version
-
-Die kostenlose Version zeigt Werbebanner über **Google AdMob**, bereitgestellt von Google Ireland Limited.
-
-Sobald du deinen ersten Stundenplan angelegt hast, fragt dich die App in einem Dialog nach deiner **Einwilligung** — dort entscheidest du auch über die Nutzungsanalyse weiter unten. Je nachdem, was du auswählst, bekommst du unterschiedliche Werbung:
-
-*   **Du stimmst der Speicherung auf dem Gerät und der Personalisierung zu.** Du erhältst personalisierte Werbung; Google verarbeitet dafür unter anderem deine Werbe-ID, deine IP-Adresse und Angaben zu deinem Gerät.
-*   **Du stimmst nur der Speicherung zu.** Du erhältst nicht-personalisierte Werbung. Die Werbe-ID wird weiterhin ausgelesen, es wird daraus aber kein Profil zur Auswahl der Anzeigen gebildet.
-*   **Du stimmst nicht zu.** Du erhältst eingeschränkte Werbung („limited ads“), die **ohne Werbe-ID und ohne Zugriff auf den Speicher deines Geräts** auskommt.
-
-Solange du noch nicht gefragt wurdest oder der Dialog abgebrochen wird, bleibt es bei der letzten Stufe.
-
-Deine Entscheidung kannst du jederzeit ändern: in den Einstellungen findest du unter **Datenschutz** einen Eintrag, der den Dialog erneut öffnet.
-
-**Rechtsgrundlage** für personalisierte und nicht-personalisierte Werbung ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG; du kannst sie jederzeit mit Wirkung für die Zukunft widerrufen. Eingeschränkte Werbung greift nicht auf dein Endgerät zu und stützt sich auf Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an der Finanzierung der kostenlosen Version.
-
-**In Stundenplan Deluxe Plus gibt es keine Werbung.** Wer sie dauerhaft nicht möchte, kann darauf wechseln.
-
 ### Käufe
 
 Der Wechsel auf Plus läuft über die Abrechnung von **Google Play**. Den Kauf wickelt Google ab; ich erfahre weder deine Zahlungsdaten noch deine vollständige Rechnungsanschrift, sondern nur, ob für dein Konto eine gültige Berechtigung vorliegt.
@@ -81,23 +63,25 @@ Der Wechsel auf Plus läuft über die Abrechnung von **Google Play**. Den Kauf w
 
 Stürzt die App ab oder tritt ein schwerer Fehler auf, wird ein Fehlerbericht über **Firebase Crashlytics** übermittelt. Ein solcher Bericht enthält technische Angaben zum Zeitpunkt des Fehlers: Gerätemodell, Android-Version, App-Version, Zustand der App, Fehlermeldung samt Aufrufliste sowie eine Installations-Kennung. Zur Einordnung enthält ein Bericht außerdem die letzten technischen Protokolleinträge der App; Bezeichnungen deiner Einträge sind daraus entfernt. Bist du angemeldet, wird zusätzlich deine Nutzerkennung übermittelt, damit sich wiederkehrende Fehler einem Konto zuordnen lassen.
 
-**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an der Stabilität der App.
+Fehlerberichte sind **standardmäßig aktiv**, gestützt auf mein berechtigtes Interesse an der Stabilität der App. Du kannst sie jederzeit unter **Einstellungen → Datenschutz** abschalten.
+
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an der Stabilität der App; du kannst der Verarbeitung jederzeit mit Wirkung für die Zukunft widersprechen.
 
 **Speicherdauer:** Crashlytics löscht Fehlerberichte automatisch nach 90 Tagen.
 
 ### Nutzungsanalyse
 
-Die App kann **Firebase Analytics** verwenden, um zu verstehen, welche Funktionen tatsächlich genutzt werden. Das geschieht **nur, wenn du zugestimmt hast** — gefragt wirst du im selben Dialog wie bei der Werbung. Ohne Zustimmung ist die Erfassung abgeschaltet, und das ist auch der Ausgangszustand, solange du noch nicht gefragt wurdest.
+Die App kann **Firebase Analytics** verwenden, um zu verstehen, welche Funktionen tatsächlich genutzt werden. Das geschieht **nur, wenn du zugestimmt hast**; ohne Zustimmung ist die Erfassung abgeschaltet, und das ist auch der Ausgangszustand.
 
 Stimmst du zu, werden die von Google standardmäßig erfassten Angaben erhoben — Gerätetyp, Sprache, ungefähre Region, Sitzungen und eine Installations-Kennung — sowie Ereignisse, die melden, **dass** du etwas angelegt oder geändert hast.
 
 **Die von dir vergebenen Bezeichnungen werden dabei nicht übermittelt:** weder Namen von Prüfungen, Fächern oder Unterrichtsstunden noch Noten, Aufgabeninhalte oder Notizen. Die Ereignisse werden außerdem **keiner Nutzerkennung zugeordnet**; die Auswertung läuft anonym.
 
-**Rechtsgrundlage** ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG — Analytics greift dafür auf Informationen auf deinem Endgerät zu. Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, an derselben Stelle in den Einstellungen wie die zur Werbung.
+**Rechtsgrundlage** ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG — Analytics greift dafür auf Informationen auf deinem Endgerät zu. Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, unter **Einstellungen → Datenschutz**.
 
 ### Empfänger und Übermittlung in die USA
 
-Die genannten Google-Dienste — Firebase Analytics, Crashlytics, Google Places, AdMob und Google Play — werden von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, bereitgestellt.
+Die genannten Google-Dienste — Firebase Analytics, Crashlytics, Google Places und Google Play — werden von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, bereitgestellt.
 
 Dabei kann es zu einer Übermittlung von Daten an Google LLC in die USA kommen. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert, sodass ein Angemessenheitsbeschluss der Europäischen Kommission nach Art. 45 DSGVO als Grundlage der Übermittlung besteht. Ergänzend gelten die Standardvertragsklauseln der Kommission nach Art. 46 Abs. 2 lit. c DSGVO.
 
@@ -125,7 +109,7 @@ Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsb
 
 Die App richtet sich an Schülerinnen und Schüler und wird daher auch von Minderjährigen genutzt.
 
-Ohne Konto ist sie vollständig und ohne Übermittlung persönlicher Daten nutzbar. Für die Anmeldung solltest du mindestens 16 Jahre alt sein; jüngere Nutzerinnen und Nutzer benötigen dafür die Zustimmung der Erziehungsberechtigten (Art. 8 DSGVO). Dasselbe gilt für die Einwilligung in personalisierte Werbung.
+Ohne Konto ist sie vollständig und ohne Übermittlung persönlicher Daten nutzbar. Für die Anmeldung solltest du mindestens 16 Jahre alt sein; jüngere Nutzerinnen und Nutzer benötigen dafür die Zustimmung der Erziehungsberechtigten (Art. 8 DSGVO).
 
 ### Änderungen
 
