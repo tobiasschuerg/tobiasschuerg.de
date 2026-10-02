@@ -47,6 +47,16 @@ Die Standortberechtigung wird **nur für diese Suche** angefragt. Du kannst sie 
 
 **Rechtsgrundlage** ist Art. 6 Abs. 1 lit. b DSGVO, da die Suche Teil der Funktion ist.
 
+### Hinweise über die Website
+
+Auf `stundenplan-deluxe.de` kannst du eine fehlende Stadt oder Schule vorschlagen oder einen freien Tag einer Schule melden. Dabei speichere ich deinen Text und, wenn du sie angibst, deine **E-Mail-Adresse** auf meinem Server. Die E-Mail-Adresse ist freiwillig.
+
+**Zweck** ist, deinen Hinweis zu prüfen, die Schul- und Feriendaten zu ergänzen und dir bei Rückfragen antworten zu können.
+
+**Rechtsgrundlage** ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an vollständigen und richtigen Daten; für die freiwillige E-Mail-Adresse deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die du jederzeit widerrufen kannst.
+
+**Speicherdauer:** Der Hinweis bleibt gespeichert, bis du die Löschung verlangst; eine formlose Nachricht an die oben genannte E-Mail-Adresse genügt.
+
 ### Kalender
 
 Auf Wunsch überträgt die App Prüfungstermine in deinen Gerätekalender. Der Zugriff erfolgt nur, wenn du die Berechtigung erteilst und die Funktion nutzt. Die Kalenderdaten werden dabei nicht an mich übertragen.
