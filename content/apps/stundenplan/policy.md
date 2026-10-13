@@ -57,6 +57,16 @@ Auf `stundenplan-deluxe.de` kannst du eine fehlende Stadt oder Schule vorschlage
 
 **Speicherdauer:** Der Hinweis bleibt gespeichert, bis du die Löschung verlangst; eine formlose Nachricht an die oben genannte E-Mail-Adresse genügt.
 
+### Stundenplan-Konverter
+
+Auf `stundenplan-deluxe.de` kannst du ein Foto, einen Screenshot oder ein PDF deines Stundenplans hochladen und bekommst ihn als fertigen Stundenplan per E-Mail-Link zurück. Dabei speichere ich die hochgeladene Datei, deine **E-Mail-Adresse**, deinen optionalen Hinweis und das Ergebnis der Umwandlung. Die Datei kann Namen enthalten, etwa von Lehrkräften oder Mitschülerinnen und Mitschülern; sie liegt in einem Speicher von Google Cloud (Google Ireland Limited) in der EU.
+
+**Zweck** ist, deinen Stundenplan umzuwandeln und dich über das Ergebnis zu benachrichtigen.
+
+**Rechtsgrundlage** ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die du beim Hochladen erteilst und jederzeit widerrufen kannst.
+
+**Speicherdauer:** Ein Jahr, damit der Link in der E-Mail so lange funktioniert; danach werden Datei, Ergebnis und E-Mail-Adresse gelöscht. Auf Wunsch lösche ich alles früher; eine formlose Nachricht an die oben genannte E-Mail-Adresse genügt.
+
 ### Kalender
 
 Auf Wunsch überträgt die App Prüfungstermine in deinen Gerätekalender. Der Zugriff erfolgt nur, wenn du die Berechtigung erteilst und die Funktion nutzt. Die Kalenderdaten werden dabei nicht an mich übertragen.
